@@ -1,0 +1,5 @@
+modello,giorni_stockout,vendite_perse,giacenza_media
+209M,0,0.0,4482.0912430341405
+auto_ets,0,0.0,3826.591243034141
+moving_average,0,0.0,3826.591243034141
+seasonal_naive,0,0.0,3826.591243034141

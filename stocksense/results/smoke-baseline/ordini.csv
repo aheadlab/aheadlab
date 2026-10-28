@@ -1,0 +1,7 @@
+sku,modello,data_ordine,arrivo_previsto,domanda_prevista,scorta_sicurezza,giacenza,in_arrivo,giorni_copertura,da_ordinare,urgenza,politica
+10049,seasonal_naive,2024-01-01,2024-01-15,972.0,0.0,971.8207199004161,0.0,20,1,DA ORDINARE,"puntuale, senza quantili"
+10048,seasonal_naive,2024-01-01,2024-01-15,951.0,0.0,1496.1616116367975,0.0,30,0,OK,"puntuale, senza quantili"
+10049,moving_average,2024-01-01,2024-01-15,926.9999999999999,0.0,971.8207199004161,0.0,22,0,OK,"puntuale, senza quantili"
+10048,moving_average,2024-01-01,2024-01-15,914.9999999999999,0.0,1496.1616116367975,0.0,30,0,OK,"puntuale, senza quantili"
+10049,auto_ets,2024-01-01,2024-01-15,950.3391618407989,0.0,971.8207199004161,0.0,21,0,OK,"puntuale, senza quantili"
+10048,auto_ets,2024-01-01,2024-01-15,1001.7829272297266,0.0,1496.1616116367975,0.0,30,0,OK,"puntuale, senza quantili"

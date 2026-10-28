@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stocksense"
+version = "0.1.0"
+description = "Standalone CPU forecasting application"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = ["numpy>=1.26", "pandas>=2.1", "plotly>=5", "streamlit>=1.32", "requests>=2.31", "pyarrow>=14", "python-dotenv>=1", "pytest>=8", "openpyxl>=3.1", "statsforecast>=1.7"]
+
+[project.optional-dependencies]
+model = ["timestral @ git+https://github.com/mistralai/timestral.git@a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "--import-mode=importlib"
+markers = ["integration: real model download and CPU inference (RUN_MODEL_TESTS=1)"]

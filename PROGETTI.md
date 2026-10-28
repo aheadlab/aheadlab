@@ -1086,4 +1086,6 @@ Stessa infrastruttura di CloudGuard (bot Telegram + GitHub Actions alle 06:00).
 | Data | Progetto | Cosa | Note / scoperte |
 |------|----------|------|-----------------|
 | 2026-10-27 | — | Creata org `aheadlab` e repo piano | |
-| | | | |
+| 2026-10-28 | Tutti | Implementate tre cartelle autonome con Docker, dashboard, test e backtest | Stato effettivo e comandi in README.md e VERIFICHE.md; checklist di account e pubblicazione non dichiarate completate. |
+| 2026-10-28 | Timestral | API, covariate e taglie 5M/28M/209M provate su CPU | known_covariates: (B,C,T+H); output (B,V,H), wrapper 1D; licenza: soglia fatturato mensile. Somme quantili non necessariamente conservative. |
+| 2026-10-28 | Risultati | CloudGuard sintetico completo; StockSense UCI completo per tre taglie; SolarCast annuale PVGIS 5M | Pubblicati anche recall anomalie inferiore alla baseline, costo delle scorte e regressione solare migliore sull'energia giornaliera. |

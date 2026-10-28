@@ -1,0 +1,31 @@
+{
+  "source": "synthetic",
+  "model": "baseline",
+  "quick": true,
+  "max_context": 720,
+  "origins": 4,
+  "first_origin": "2023-01-15 00:00:00+00:00",
+  "last_origin": "2023-10-15 00:00:00+00:00",
+  "horizon": 48,
+  "units": "kWh/kWp",
+  "weather_B_C": "observed_oracle: optimistic, not operational",
+  "overlapping_days": "Each origin/lead day is evaluated separately",
+  "end_boundary": "Dec 31 origin excluded: next-year observations unavailable",
+  "context_policy": "All available preceding history up to max_context; default full retains previous year",
+  "daylight": "observed shortwave_radiation > 0",
+  "missing": "hourly finite pairs; daily totals only complete days",
+  "request": {
+    "data": "synthetic",
+    "model": "baseline",
+    "quick": true,
+    "output": "results/smoke-baseline",
+    "year": 2023,
+    "lat": 45.82,
+    "lon": 8.83,
+    "angle": 30,
+    "aspect": 0,
+    "loss": 14,
+    "max_context": null,
+    "cache_dir": "data/raw"
+  }
+}

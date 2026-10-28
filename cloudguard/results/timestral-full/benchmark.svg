@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="400"><rect width="100%" height="100%" fill="white"/>
+<text x="10" y="25">CloudGuard — MAE medio USD, dati sintetici</text>
+<text x="10" y="76">5M h=7</text><rect x="230" y="60" width="229.8" height="23" fill="steelblue"/><text x="640" y="76">1.714</text>
+<text x="10" y="116">5M h=30</text><rect x="230" y="100" width="234.5" height="23" fill="steelblue"/><text x="640" y="116">1.749</text>
+<text x="10" y="156">moving_average h=7</text><rect x="230" y="140" width="389.0" height="23" fill="steelblue"/><text x="640" y="156">2.901</text>
+<text x="10" y="196">moving_average h=30</text><rect x="230" y="180" width="400.0" height="23" fill="steelblue"/><text x="640" y="196">2.983</text>
+<text x="10" y="236">seasonal_naive h=7</text><rect x="230" y="220" width="386.5" height="23" fill="steelblue"/><text x="640" y="236">2.882</text>
+<text x="10" y="276">seasonal_naive h=30</text><rect x="230" y="260" width="298.6" height="23" fill="steelblue"/><text x="640" y="276">2.227</text></svg>

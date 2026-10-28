@@ -1,0 +1,38 @@
+{
+  "data": "uci",
+  "inventario": "SIMULATO, seed 42; non giacenze UCI",
+  "mode": "smoke",
+  "models": [
+    "seasonal_naive",
+    "moving_average",
+    "auto_ets",
+    "209M"
+  ],
+  "seed": 42,
+  "folds": 2,
+  "horizon": 28,
+  "step": 28,
+  "skus": [
+    "84077",
+    "21212"
+  ],
+  "selection_cutoff": "2011-10-15 00:00:00",
+  "inventory_days": 28,
+  "raw_rows": 1067371,
+  "clean_rows": 1037082,
+  "python": "3.11.18",
+  "elapsed_seconds": 19.191292932024226,
+  "config": {
+    "*": {
+      "lead_time": 14,
+      "ciclo": 7,
+      "lotto_minimo": 1,
+      "livello": "p90"
+    }
+  },
+  "clipping": "99.5 percentile training-only; target and MASE scale raw",
+  "inventory_timing": "receive, review before demand, consume; no backlog",
+  "quantiles": "marginal sums heuristic; baselines point only",
+  "ties": "all tied minima win; undefined MASE excluded",
+  "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980"
+}

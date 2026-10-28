@@ -1,0 +1,16 @@
+name: Daily offline demo (standalone export)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -e .
+      - run: python scripts/daily.py
+# Intentionally manual, no Telegram secrets, no external sends.

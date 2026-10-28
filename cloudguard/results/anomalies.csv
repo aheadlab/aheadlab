@@ -1,0 +1,2 @@
+modello,giorni_valutati,giorni_anomali,veri_positivi,falsi_allarmi,precisione,recall_giorni,eventi_valutati,eventi_trovati,recall_eventi
+mean_3sigma,1500,22,21,0,1.0,0.9545454545454546,10,10,1.0

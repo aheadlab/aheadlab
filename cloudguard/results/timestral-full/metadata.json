@@ -1,0 +1,29 @@
+{
+  "dataset": "synthetic",
+  "seed": 7,
+  "end_date": "2025-12-31",
+  "days": 400,
+  "services": [
+    "AWS Lambda",
+    "Amazon EC2",
+    "Amazon RDS",
+    "Amazon S3",
+    "CloudWatch"
+  ],
+  "mode": "full",
+  "model": "5M",
+  "folds": 20,
+  "step": 7,
+  "horizons": [
+    7,
+    30
+  ],
+  "anomaly_days": 300,
+  "selection_end": "2025-03-06 00:00:00",
+  "currency": "USD",
+  "python": "3.11.18",
+  "numpy": "2.4.6",
+  "pandas": "2.3.3",
+  "interval": "Actual model marginal quantiles only; baseline has no coverage",
+  "event_denominator": "events intersecting evaluated service/date pairs"
+}

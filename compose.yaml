@@ -1,0 +1,36 @@
+services:
+  cloudguard:
+    build:
+      context: ./cloudguard
+      args:
+        INSTALL_MODEL: ${INSTALL_MODEL:-true}
+    ports: ["127.0.0.1:8501:8501"]
+    environment:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+    volumes:
+      - model-cache:/home/app/.cache/huggingface
+  stocksense:
+    build:
+      context: ./stocksense
+      args:
+        INSTALL_MODEL: ${INSTALL_MODEL:-true}
+    ports: ["127.0.0.1:8502:8501"]
+    environment:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+    volumes:
+      - model-cache:/home/app/.cache/huggingface
+  solarcast:
+    build:
+      context: ./solarcast
+      args:
+        INSTALL_MODEL: ${INSTALL_MODEL:-true}
+    ports: ["127.0.0.1:8503:8501"]
+    environment:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+    volumes:
+      - model-cache:/home/app/.cache/huggingface
+volumes:
+  model-cache:

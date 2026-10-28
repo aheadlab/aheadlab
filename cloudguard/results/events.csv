@@ -1,0 +1,16 @@
+evento,servizio,inizio,giorni
+Amazon EC2-1,Amazon EC2,2025-02-18,3
+Amazon EC2-2,Amazon EC2,2025-07-09,3
+Amazon EC2-3,Amazon EC2,2025-12-04,2
+Amazon RDS-1,Amazon RDS,2025-01-01,2
+Amazon RDS-2,Amazon RDS,2025-06-13,3
+Amazon RDS-3,Amazon RDS,2025-10-29,1
+Amazon S3-1,Amazon S3,2025-02-09,3
+Amazon S3-2,Amazon S3,2025-05-04,1
+Amazon S3-3,Amazon S3,2025-10-29,2
+AWS Lambda-1,AWS Lambda,2025-03-04,3
+AWS Lambda-2,AWS Lambda,2025-06-15,3
+AWS Lambda-3,AWS Lambda,2025-09-09,3
+CloudWatch-1,CloudWatch,2025-03-06,1
+CloudWatch-2,CloudWatch,2025-05-18,1
+CloudWatch-3,CloudWatch,2025-09-19,3
