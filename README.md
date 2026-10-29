@@ -8,6 +8,16 @@ Tre applicazioni autonome di previsione su CPU, realizzate a partire da [`PROGET
 | [StockSense](stocksense/README.md) | Vendite, riordini CSV e simulazione scorte | http://localhost:8502 |
 | [SolarCast](solarcast/README.md) | Fotovoltaico, meteo e fasce di autoconsumo | http://localhost:8503 |
 
+## Documentazione per sottoprogetto
+
+Ogni progetto mantiene una guida autonoma, esportabile insieme al codice:
+
+- [CloudGuard — operazioni e API](cloudguard/docs/OPERATIONS.md): demo, schema costi, AWS/Telegram opt-in, report, diagnosi e Docker.
+- [StockSense — operazioni e API](stocksense/docs/OPERATIONS.md): dati UCI/cache, configurazione SKU, riordini, simulazione, report e Docker.
+- [SolarCast — operazioni e API](solarcast/docs/OPERATIONS.md): modalità retrospettiva/operativa, unità UTC/kWp, covariate, fasce, notifiche e Docker.
+
+I singoli `README.md` riassumono il prodotto e i risultati misurati; `SPEC.md` conserva i contratti; `docs/OPERATIONS.md` spiega come usarlo e diagnosticare i problemi. Il registro trasversale delle verifiche rimane in [VERIFICHE.md](VERIFICHE.md).
+
 ## Avvio dei tre progetti
 
 Da questa cartella, con Docker Desktop/Engine attivo:

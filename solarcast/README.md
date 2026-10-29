@@ -1,5 +1,7 @@
 # SolarCast
 
+Documentazione: [guida operativa e API](docs/OPERATIONS.md) · [contratti](SPEC.md).
+
 Previsioni fotovoltaiche a 48 ore e fasce consigliate per l'autoconsumo, con confronto fra Timestral, persistenza e regressione sulla radiazione.
 
 ## Il problema e il funzionamento
@@ -69,7 +71,7 @@ Benchmark completo 5M su PVGIS Varese 2022–2023: **364 origini nel 2023**, 48 
 ## Previsione operativa e notifiche
 Non si collega lo storico PVGIS di anni fa al meteo di oggi fingendo una continuità inesistente. L'API Python `solarcast.forecast.forecast(history, future_weather, method='B', operational=True)` richiede produzione recente, normalizzata in kWh/kWp, un indice UTC orario e meteo immediatamente successivo. `history` contiene `kwh`, `shortwave_radiation`, `cloud_cover`, `temperature_2m`; il futuro contiene le tre covariate. `scarica_meteo_previsto` scarica il meteo attuale, con cache giornaliera. L'acquisizione da inverter e la raccolta di misure recenti restano a carico dell'utilizzatore.
 
-`solarcast.notify.telegram` è dry-run di default; inviare richiede attivazione esplicita e variabili `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID`. `scripts/daily.py` e la schedulazione inclusa sono soltanto demo retrospettive senza invio. Nessun bot reale o deployment pubblico è stato configurato. I workflow annidati funzionano dopo l'esportazione del repository.
+`solarcast.notify.telegram` è dry-run di default; inviare richiede `dry_run=False` e argomenti espliciti `token` e `chat_id`. Il chiamante può leggerli da variabili protette `TELEGRAM_TOKEN` e `TELEGRAM_CHAT_ID`, ma la funzione non le legge automaticamente. Proteggere i log degli errori HTTP, che non hanno una sanitizzazione dedicata. `scripts/daily.py` e la schedulazione inclusa sono soltanto demo retrospettive senza invio. Nessun bot reale o deployment pubblico è stato configurato. I workflow annidati funzionano dopo l'esportazione del repository.
 
 ## Limiti e licenze
 - Pesi Timestral: MIT modificata Mistral, con restrizione per fatturato consolidato mensile superiore a 20 milioni USD nel mese precedente. [Licenza ufficiale](https://huggingface.co/mistralai/Timestral-5M/blob/main/LICENSE). Codice libreria Apache 2.0; codice di questo progetto MIT.

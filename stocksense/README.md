@@ -1,5 +1,7 @@
 # StockSense
 
+Documentazione: [guida operativa e API](docs/OPERATIONS.md) · [contratti](SPEC.md).
+
 Previsioni giornaliere di vendita, proposte di riordino e confronto delle politiche di magazzino. Progetto Python autonomo: nessun import dagli altri progetti del portfolio.
 
 **Demo sintetica offline per default. Giacenze sempre SIMULATE, non giacenze UCI.** Nessun ordine viene trasmesso a fornitori. La dashboard propone quantità e data di arrivo ipotetica, da verificare prima dell'acquisto.

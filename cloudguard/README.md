@@ -1,5 +1,7 @@
 # CloudGuard
 
+Documentazione: [guida operativa e API](docs/OPERATIONS.md) · [contratti](SPEC.md).
+
 Previsioni dei costi cloud per servizio, stima di fine mese e allarmi leggibili. Demo autonoma **sintetica in USD**, senza chiamate AWS, invii Telegram o download pesi impliciti.
 
 ## Il problema
