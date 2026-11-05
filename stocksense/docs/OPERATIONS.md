@@ -9,12 +9,14 @@ python -m venv .venv
 # Bash: source .venv/bin/activate
 # PowerShell: .venv\Scripts\Activate.ps1
 pip install -e .
-streamlit run app/streamlit_app.py
+npm --prefix web ci
+npm --prefix web run build
+python -m uvicorn stocksense.api:app --host 127.0.0.1 --port 8501
 ```
 
-La demo usa transazioni artificiali e giacenze simulate. Nella pagina **Da fare oggi** scegliere il modello e controllare data della decisione, priorità e quantità. Il pulsante CSV esporta solo righe con quantità da ordinare positiva: non invia ordini. **Prodotto** mostra storico, previsione e giacenza senza nuovi arrivi. **Risultati** legge la cartella indicata: per esempio `results/uci-28M` per il confronto completo reale, anziché lo smoke sintetico predefinito.
+La demo usa transazioni artificiali e giacenze simulate. Scegliere sorgente, modello e limite SKU, poi Applica parametri. **Piano di riordino** offre ricerca, filtro priorità, ordinamento, paginazione e selezione multipla. I CSV di riordino includono soltanto quantità positive: non inviano ordini. **Catalogo e previsioni** mostra storico, previsione e stock senza nuovi arrivi; i dettagli si aprono anche dalle righe del piano. **Analisi e simulazioni** seleziona report registrati, per esempio `uci-28M`, senza accettare percorsi arbitrari.
 
-La data decisionale segue la fine dello storico: non è necessariamente oggi. Per rendere effettivi i parametri globali della sidebar, selezionare la checkbox di modifica per tutti gli SKU.
+La data decisionale segue la fine dello storico, non necessariamente oggi. In Politica di riordino, attivare Applica parametri globali per sostituire i valori configurati per SKU. Le scelte e il tema persistono nel browser. L'avvio locale richiede Node 22; Docker compila il frontend senza Node sull'host. Vedere il [contratto HTTP](API.md) e `/docs` per gli endpoint.
 
 ## 2. Dati reali e aggiornamento della cache
 
@@ -98,9 +100,11 @@ docker run --rm stocksense pytest -q
 
 Per i test reali: Bash `RUN_MODEL_TESTS=1 pytest -q`; PowerShell `$env:RUN_MODEL_TESTS='1'; pytest -q`. Senza variabile sono saltate esplicitamente due integrazioni.
 
+- **HTTP 409:** un calcolo è già in corso. Attendere e riprovare; chiudere la pagina non interrompe l'inferenza server.
+- **HTTP 503:** sorgente o modello non disponibile. Nessun fallback nascosto; i vecchi risultati restano riconoscibili finché non riesce un nuovo calcolo.
 - **File UCI assente nel container:** i dataset sono esclusi dal build; montarli esplicitamente in `/app/data/raw` o usare la demo. Il processo non-root deve poter scrivere in `/app/data/processed`.
 - **Storico insufficiente:** diminuire la dimensione del protocollo o fornire più storico; non usare il target per selezionare prodotti o stimare il clipping.
 - **Ordine inatteso:** verificare configurazione effettiva, orizzonte, giacenza simulata, pending e checkbox degli override.
 - **Zero MASE geometrico:** guardare MAE e righe per SKU, non dichiarare accuratezza perfetta.
 
-Nel repository esportato i workflow inclusi testano package e smoke; non effettuano ordini, deployment o download di credenziali. Nessuna integrazione Shopify è già attivata.
+Il container serve React e FastAPI sulla stessa porta, come utente non-root, senza Streamlit; healthcheck `/api/health`. API senza autenticazione: mantenere il binding localhost. Nel repository esportato i workflow inclusi testano package, smoke, build frontend e flussi browser; non effettuano ordini, deployment o download di credenziali. Nessuna integrazione Shopify è già attivata.

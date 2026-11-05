@@ -13,11 +13,15 @@ python -m venv .venv
 # Bash: source .venv/bin/activate
 # PowerShell: .venv\Scripts\Activate.ps1
 pip install -e .
-streamlit run app/streamlit_app.py
 python scripts/daily.py
+npm --prefix web ci
+npm --prefix web run build
+python -m uvicorn solarcast.api:app --host 127.0.0.1 --port 8501
 ```
 
-Daily è sempre una demo retrospettiva dry-run. Nella dashboard selezionare origine storica, potenza e metodo. Un report senza p10 mostra fasce indicative, non prudenti. La pagina Risultati espone CSV e metadati dei report presenti.
+Daily è sempre una demo retrospettiva dry-run. Il workspace React espone sorgente, potenza e metodo; origine, coordinate, contesto e soglia sono in Impianto, periodo e fasce. Premere Applica parametri per ricalcolare. PVGIS richiede la checkbox di consenso al download: la sola selezione non avvia richieste pubbliche. Al riavvio della pagina si usa una previsione sintetica finché non si riconferma PVGIS.
+
+Previsione 48 ore include tabella oraria e CSV; Agenda consumi filtra le fasce. Senza p10 le fasce sono indicative, non prudenti. Analisi e benchmark espone CSV e metadati dei report registrati. Tema e impostazioni sono salvati nel browser. L'avvio locale richiede Node 22; Docker compila il frontend senza Node sull'host. Il [contratto HTTP](API.md) e `/docs` descrivono gli endpoint: l'API Python operativa seguente non è un endpoint live della UI.
 
 ## 2. Schema, unità e esempio offline
 
@@ -92,7 +96,10 @@ Test con pesi reali: Bash `RUN_MODEL_TESTS=1 pytest -q`; PowerShell `$env:RUN_MO
 - **Future must immediately follow target history:** correggere allineamento e periodo, senza rietichettare arbitrariamente le date.
 - **Expected timezone-aware UTC timestamps:** fornire indice UTC consapevole del fuso; Europe/Rome è solo visualizzazione.
 - **Nessuna fascia:** soglia non superata per la durata richiesta; non è un errore da correggere allargando artificialmente p10.
+- **HTTP 409:** un calcolo è già in corso. Attendere; chiudere il browser non cancella il lavoro server.
 - **PVGIS/meteo falliscono:** controllare disponibilità anno, coordinate, condizioni del servizio e risposta HTTP. Non esiste fallback nascosto alla demo.
 - **Unità troppo grandi:** verificare se il target è già energia totale; dividerlo per la potenza nominale prima dell'API e non scalare due volte.
+
+Il container non-root serve React e FastAPI sulla stessa porta, senza Streamlit; healthcheck `/api/health`. Le API non hanno autenticazione: mantenere il binding localhost.
 
 Per pubblicazione commerciale verificare separatamente licenze dei pesi, attribuzione PVGIS/Open-Meteo e condizioni dell'API gratuita. Il repository non distribuisce dati grezzi o pesi, e non configura un deployment pubblico.

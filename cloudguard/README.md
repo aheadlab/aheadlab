@@ -1,6 +1,6 @@
 # CloudGuard
 
-Documentazione: [guida operativa e API](docs/OPERATIONS.md) · [contratti](SPEC.md).
+Documentazione: [guida operativa](docs/OPERATIONS.md) · [API HTTP](docs/API.md) · [contratti](SPEC.md).
 
 Previsioni dei costi cloud per servizio, stima di fine mese e allarmi leggibili. Demo autonoma **sintetica in USD**, senza chiamate AWS, invii Telegram o download pesi impliciti.
 
@@ -10,7 +10,7 @@ Un'istanza dimenticata o un loop possono far crescere la bolletta. CloudGuard co
 **Pipeline:** dati sintetici / AWS esplicito → calendario giornaliero per servizio → baseline oppure Timestral → stima mensile, allarmi, dashboard e benchmark rolling.
 
 ## Demo e risultati
-La dashboard locale include storico, previsione a 30 giorni, selezione servizio/modello, cutoff mensile, allarmi e pagina risultati. Hosting pubblico e screenshot interattivo non ancora disponibili.
+Il workspace React include panoramica, costi per servizio, centro anomalie e benchmark. Filtri persistenti, tema chiaro/scuro, layout mobile, grafici interattivi e CSV sono collegati a FastAPI. Orizzonte configurabile, 30 giorni predefiniti. Nessun hosting pubblico.
 
 ![Benchmark sintetico Timestral e baseline](results/timestral-full/benchmark.svg)
 
@@ -30,7 +30,7 @@ Allarmi media28 + 3σ, scarto minimo 5 USD: **1.500 giorni valutati**, 22 giorni
 La dashboard consente di scegliere il report completo 5M e il report baseline. Artefatti baseline: `results/backtest.csv`, `anomalies.csv`, `anomaly_days.csv`, `events.csv`, `metadata.json`, `benchmark.svg`. Baseline senza quantili: copertura CSV vuota, non zero. Origini sovrapposte non sono campioni indipendenti. Il modello vede i picchi passati, realisticamente può adattarsi ad essi.
 
 ## Eseguire in locale
-Da questa cartella, Python 3.11+:
+Da questa cartella, Python 3.11+ e Node 22 (oppure usare Docker, che include il build frontend):
 
 ```bash
 python -m venv .venv
@@ -41,7 +41,9 @@ pytest -q
 python scripts/run_backtest.py --quick --model baseline --output results/smoke
 python scripts/run_backtest.py --model baseline
 python -m cloudguard.daily
-streamlit run app/streamlit_app.py
+npm --prefix web ci
+npm --prefix web run build
+python -m uvicorn cloudguard.api:app --host 127.0.0.1 --port 8501
 ```
 
 La baseline non richiede torch/Timestral. Per il modello vero (CPU):
@@ -53,7 +55,7 @@ python scripts/run_backtest.py --quick --model 5M --output results/timestral-smo
 python scripts/run_backtest.py --model 5M --output results/timestral-full
 ```
 
-Disponibili `5M`, `28M`, `123M`, `209M`. Il benchmark completo Timestral aggiunge le due baseline previsionali e la regola 3σ; può essere lento (1.500 previsioni a un passo più rolling). Il primo utilizzo scarica pesi Hugging Face, cache standard `~/.cache/huggingface`; nessun fallback silenzioso. La dashboard parte sempre in baseline; la selezione Timestral è esplicita.
+Disponibili `5M`, `28M`, `123M`, `209M`. Il benchmark completo Timestral aggiunge le due baseline previsionali e la regola 3σ; può essere lento (1.500 previsioni a un passo più rolling). Il primo utilizzo scarica pesi Hugging Face, cache standard `~/.cache/huggingface`; nessun fallback silenzioso. Al primo accesso il workspace parte in baseline; le scelte successive sono salvate nel browser. Le taglie esposte via web sono 5M, 28M e 209M.
 
 Docker CPU, dalla cartella standalone:
 
@@ -83,5 +85,9 @@ Telegram è dry-run senza `--send`, timeout 15s, errori sanitizzati senza URL/to
 - Crediti, rimborsi, Savings Plans e servizi nuovi possono invalidare le soglie; costi negativi conservati. Tarare per cliente, non interpretare anomalie come frodi.
 - Event recall misura almeno un giorno rilevato nell'evento; day recall tutti i giorni anomali effettivamente valutati. Denominatore nullo = NaN.
 
+## Verifica del workspace
+
+65 test Python passati con integrazioni modello abilitate; 3 flussi Chromium desktop/mobile. Dalla cartella `web/`, con API già avviata: `npm run test:e2e` (prima installare Chromium con `npx playwright install chromium`). `START_API=1` permette al runner di avviare l'API su porta 8501 quando libera. Healthcheck `/api/health`, documentazione `/docs`. Uso locale senza autenticazione, non esporre pubblicamente.
+
 ## Stack e licenze
-Python, NumPy, pandas, boto3, Plotly, Streamlit, requests; Timestral solo nel wrapper `forecaster.py`. Test di dominio isolati con forecasting mock; test con pesi reali separati e opt-in. Codice MIT. Timestral libreria Apache 2.0; pesi Mistral con MIT modificata, esclusione per aziende con fatturato consolidato **mensile** oltre 20 milioni USD nel mese precedente: leggere la licenza upstream prima dell'uso commerciale. Nessun peso ridistribuito. Dati demo generati localmente, mai costi di terzi.
+Python, NumPy, pandas, boto3, FastAPI/Uvicorn, React/TypeScript, Recharts, requests; Timestral solo nel wrapper `forecaster.py`. Test di dominio isolati con forecasting mock; test con pesi reali separati e opt-in. Codice MIT. Timestral libreria Apache 2.0; pesi Mistral con MIT modificata, esclusione per aziende con fatturato consolidato **mensile** oltre 20 milioni USD nel mese precedente: leggere la licenza upstream prima dell'uso commerciale. Nessun peso ridistribuito. Dati demo generati localmente, mai costi di terzi.

@@ -1,11 +1,11 @@
 # SolarCast
 
-Documentazione: [guida operativa e API](docs/OPERATIONS.md) · [contratti](SPEC.md).
+Documentazione: [guida operativa](docs/OPERATIONS.md) · [API HTTP](docs/API.md) · [contratti](SPEC.md).
 
 Previsioni fotovoltaiche a 48 ore e fasce consigliate per l'autoconsumo, con confronto fra Timestral, persistenza e regressione sulla radiazione.
 
 ## Il problema e il funzionamento
-Sapere quando produrre energia aiuta a spostare i consumi. La pipeline è: produzione oraria + meteo → calendario UTC → previsione → energia e fasce locali Europe/Rome. La dashboard parte da una **demo sintetica retrospettiva**, senza rete. La pagina PVGIS usa dati satellitari simulati e meteo storico, non misure di un impianto reale.
+Sapere quando produrre energia aiuta a spostare i consumi. La pipeline è: produzione oraria + meteo → calendario UTC → previsione → energia e fasce locali Europe/Rome. La dashboard parte da una **demo sintetica retrospettiva**, senza rete. La sorgente PVGIS usa dati satellitari simulati e meteo storico, non misure di un impianto reale, e richiede consenso esplicito prima del download. Il workspace React offre panoramica, dettaglio 48 ore, agenda consumi e benchmark, con tema chiaro/scuro e parametri persistenti.
 
 - **A:** Timestral sullo storico della produzione.
 - **B:** Timestral con radiazione, nuvolosità e temperatura a futuro noto.
@@ -14,14 +14,16 @@ Sapere quando produrre energia aiuta a spostare i consumi. La pipeline è: produ
 - Le fasce su p10 sono prudenti rispetto alla previsione marginale, non garanzie di disponibilità. Con baseline le fasce sono dichiarate **indicative sulla mediana**.
 
 ## Avvio locale
-Dalla cartella `solarcast/`, Python 3.11+:
+Dalla cartella `solarcast/`, Python 3.11+ e Node 22 (oppure Docker per il build completo):
 
 ```bash
 pip install -e .
 pytest -q
-streamlit run app/streamlit_app.py
 python scripts/daily.py
 python scripts/run_backtest.py --quick --output results/smoke-baseline
+npm --prefix web ci
+npm --prefix web run build
+python -m uvicorn solarcast.api:app --host 127.0.0.1 --port 8501
 ```
 
 Per Timestral CPU:
@@ -66,7 +68,9 @@ Benchmark completo 5M su PVGIS Varese 2022–2023: **364 origini nel 2023**, 48 
 
 ![Backtest annuale PVGIS](results/pvgis-5M/summary.svg)
 
-`results/pvgis-28M-smoke/` contiene invece quattro origini stagionali con 720 ore di contesto: solo smoke con modello reale, non confronto diretto di taglie rispetto al protocollo annuale. `results/smoke-baseline/` è sintetico. Suite finale: **55 test passati**, inclusi due test di inferenza reale; dashboard A e B provate anche nell'immagine Docker.
+`results/pvgis-28M-smoke/` contiene invece quattro origini stagionali con 720 ore di contesto: solo smoke con modello reale, non confronto diretto di taglie rispetto al protocollo annuale. `results/smoke-baseline/` è sintetico. Suite attuale: **60 test Python passati**, inclusi due test di inferenza reale, più **3 test Chromium** desktop/mobile. Verificati ricalcolo potenza, 48 righe orarie, esportazione, report, consenso PVGIS e gestione degli errori; anche inferenza HTTP 5M/B reale.
+
+Da `web/`, con API già avviata su 8501: `npm run test:e2e` dopo `npx playwright install chromium`. `START_API=1` può avviare l'API per i test quando la porta è libera. Healthcheck `/api/health`, OpenAPI `/docs`. API senza autenticazione, solo uso locale.
 
 ## Previsione operativa e notifiche
 Non si collega lo storico PVGIS di anni fa al meteo di oggi fingendo una continuità inesistente. L'API Python `solarcast.forecast.forecast(history, future_weather, method='B', operational=True)` richiede produzione recente, normalizzata in kWh/kWp, un indice UTC orario e meteo immediatamente successivo. `history` contiene `kwh`, `shortwave_radiation`, `cloud_cover`, `temperature_2m`; il futuro contiene le tre covariate. `scarica_meteo_previsto` scarica il meteo attuale, con cache giornaliera. L'acquisizione da inverter e la raccolta di misure recenti restano a carico dell'utilizzatore.

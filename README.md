@@ -1,6 +1,6 @@
 # aheadlab — tre progetti pronti in locale
 
-Tre applicazioni autonome di previsione su CPU, realizzate a partire da [`PROGETTI.md`](PROGETTI.md). Ogni cartella ha package Python, dashboard Streamlit, Dockerfile, test, workflow standalone, licenza e risultati riproducibili. Non ci sono import fra i progetti.
+Tre applicazioni autonome di previsione su CPU, realizzate a partire da [`PROGETTI.md`](PROGETTI.md). Ogni cartella ha package Python, frontend React/TypeScript, API FastAPI, Dockerfile, test, workflow standalone, licenza e risultati riproducibili. Non ci sono import fra i progetti.
 
 | Progetto | Applicazione | Dashboard locale |
 |---|---|---|
@@ -16,7 +16,9 @@ Ogni progetto mantiene una guida autonoma, esportabile insieme al codice:
 - [StockSense — operazioni e API](stocksense/docs/OPERATIONS.md): dati UCI/cache, configurazione SKU, riordini, simulazione, report e Docker.
 - [SolarCast — operazioni e API](solarcast/docs/OPERATIONS.md): modalità retrospettiva/operativa, unità UTC/kWp, covariate, fasce, notifiche e Docker.
 
-I singoli `README.md` riassumono il prodotto e i risultati misurati; `SPEC.md` conserva i contratti; `docs/OPERATIONS.md` spiega come usarlo e diagnosticare i problemi. Il registro trasversale delle verifiche rimane in [VERIFICHE.md](VERIFICHE.md).
+Le interfacce offrono navigazione responsive, tema chiaro/scuro, filtri persistenti, grafici interattivi ed esportazione CSV. CloudGuard separa servizi e anomalie; StockSense include selezione multipla dei riordini e schede SKU; SolarCast mostra dettaglio orario e agenda delle fasce. Nessuna delle UI invia ordini o notifiche.
+
+Ogni `docs/API.md` descrive il contratto HTTP; `/docs` sul servizio espone OpenAPI. I singoli `README.md` riassumono il prodotto e i risultati misurati; `SPEC.md` conserva i contratti; `docs/OPERATIONS.md` spiega come usarlo e diagnosticare i problemi. Il registro trasversale delle verifiche rimane in [VERIFICHE.md](VERIFICHE.md).
 
 ## Avvio dei tre progetti
 
@@ -39,7 +41,9 @@ python scripts/test_all.py --build --models
 python scripts/test_dashboards.py --models
 ```
 
-**Suite finale: 185 test passati**, inclusa inferenza reale 5M: CloudGuard 60, StockSense 70, SolarCast 55. Sono stati verificati anche batch/covariate e inferenza reale 28M/209M. Le dashboard sono state provate con Streamlit AppTest, compreso SolarCast B con meteo; non è un test visuale tramite browser. Senza `--models`, due integrazioni per progetto vengono saltate esplicitamente.
+Prima dei test browser avviare i servizi con `docker compose up -d --wait`. Il runner browser usa un container Playwright: non richiede Node sul computer host.
+
+**Suite attuale: 200 test Python passati**, inclusa inferenza reale 5M: CloudGuard 65, StockSense 75, SolarCast 60. **9 test Chromium** coprono desktop/mobile, filtri, esportazione, errori recuperabili, tema e consenso ai dati pubblici; `--models` aggiunge tre chiamate HTTP con Timestral 5M reale, SolarCast B incluso. Senza `--models`, due integrazioni Python per progetto vengono saltate. I benchmark 28M/209M esistenti restano invariati.
 
 ## Risultati, senza promesse gonfiate
 
@@ -65,7 +69,8 @@ La directory destinazione deve essere nuova ed esterna a questa workspace. Lo sc
 - AWS Cost Explorer e Telegram implementati e testati con stub/dry-run, **non con credenziali reali**. Nessuna chiamata AWS fatturabile o messaggio inviato.
 - CloudGuard non ha recupero persistente dei giorni provvisori né deduplicazione degli invii: non è ancora un monitoraggio di produzione.
 - Shopify e integrazioni inverter non implementati; erano opzionali. SolarCast operativo richiede produzione recente fornita dall'utilizzatore, non può prevedere oggi da uno storico PVGIS vecchio di anni.
-- Non sono presenti screenshot di browser o demo online; i grafici inclusi sono risultati dei benchmark.
+- Nessuna demo online. I test browser producono screenshot locali in `<progetto>/web/test-results/`, esclusi da Git; i grafici versionati restano quelli dei benchmark.
+- Le API sono workspace locali senza autenticazione: non esporle su Internet. Il limite di un calcolo contemporaneo vale per processo; usare un solo worker. Le preferenze salvate nel browser possono riattivare il modello precedentemente scelto.
 
 ## Contratti e licenze
 

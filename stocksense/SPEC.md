@@ -7,7 +7,7 @@ title: StockSense — domanda e scorte
 
 # StockSense — domanda e scorte
 
-Le API di backtest e simulazione verificano date ordinate, univoche e giornaliere consecutive; un RangeIndex a passo uno rappresenta osservazioni giornaliere senza date. Questo impedisce di confondere lead time in giorni con righe settimanali, o di usare training cronologicamente futuro. La cache dashboard include l'impronta SHA256 del file UCI corrente, calcolata prima della cache: una sostituzione del file invalida anche dati e ordini della UI, non solo il parquet.
+Le API di backtest e simulazione verificano date ordinate, univoche e giornaliere consecutive; un RangeIndex a passo uno rappresenta osservazioni giornaliere senza date. Questo impedisce di confondere lead time in giorni con righe settimanali, o di usare training cronologicamente futuro. La cache del backend HTTP include l'impronta SHA256 del file UCI corrente, calcolata prima della cache: una sostituzione del file invalida anche dati e ordini della UI, non solo il parquet.
 
 La media geometrica MASE è zero quando almeno un caso ha errore esattamente zero. Non indica previsioni perfette sugli altri casi: per interpretare i report usare anche MAE, vittorie e le righe per SKU/origine.
 
@@ -18,6 +18,9 @@ La selezione top SKU è congelata sul prefisso prima del primo test. I calendari
 Il riordino copre lead time più ciclo, considera giacenza e ordini in arrivo, tronca previsioni negative e richiede un orizzonte sufficiente. Lotto minimo è una quantità minima, non un multiplo. Sommare quantili giornalieri produce una regola euristica, non un livello di servizio garantito. Previsioni puntuali baseline non diventano finti intervalli calibrati.
 
 La simulazione parte dallo stesso stock per tutti i metodi, riceve gli ordini alla data prevista, rivede gli ordini a cadenza settimanale usando solo il passato, poi consuma le vendite reali e registra vendite perse senza arretrati. Le metriche pubblicano giorni di stockout, vendite perse e giacenza media. Tempi di consegna e ciclo devono essere interi positivi. Benchmark rolling 30 giorni, 8 origini passo 30, MASE settimanale, media geometrica e vittorie; serie costanti non hanno MASE definito.
+
+## Workspace web
+React espone panoramica, piano di riordino, catalogo previsionale e report attraverso FastAPI. La sorgente UCI richiede l'Excel già presente: l'API non lo scarica automaticamente. Le giacenze delle risposte web sono sempre simulate; le proposte e i CSV non effettuano acquisti. Selezione multipla ed esportazione restano operazioni locali del browser. Gli override globali sono espliciti: altrimenti valgono i parametri di `config/prodotti.csv`. La previsione copre almeno lead time più ciclo; lo stock visualizzato esclude nuovi arrivi. Il contratto degli endpoint è in `docs/API.md`.
 
 ## Convenzioni implementative
 La CLI parte offline con dati sintetici seed 42 (50 prodotti); UCI e Timestral sono opt-in espliciti. `--model baseline` confronta tutte le tre baseline, una taglia aggiunge Timestral allo stesso confronto. Full: 8 fold, orizzonte/passo 30, top 50, inventario ultimi 180 giorni. Smoke: 2 SKU, 2 fold orizzonte/passo 28, inventario 28 giorni. La selezione è congelata prima del più antico cutoff tra backtest e simulazione.

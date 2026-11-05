@@ -15,6 +15,9 @@ Timestral è confinato in forecaster.py, restituisce vettori 1D anche a orizzont
 
 Le somme di quantili giornalieri per il mese non sono quantili del totale: la banda è un'indicazione euristica senza garanzia di copertura. Il calendario mensile si riferisce all'ultimo dato disponibile. Invio Telegram è esplicito, con timeout e gestione errore HTTP; la schedulazione predefinita non invia messaggi reali.
 
+## Workspace web
+React espone panoramica, distribuzione dei costi, registro anomalie e benchmark attraverso FastAPI. La sorgente HTTP è soltanto sintetica: accesso AWS e Telegram rimangono nelle API Python/CLI opt-in, non sono effetti collaterali del browser. Il cutoff governa la data dell'analisi; le anomalie web sono retrospettive sugli ultimi 30 giorni e un evento può generare record distinti per metodo. Il CSV esporta i risultati calcolati, non dati nuovi. La baseline non riceve bande probabilistiche artificiali. Il contratto operativo degli endpoint è in `docs/API.md`.
+
 ## Contratti implementativi
 Dati lunghi: `data` (giorno senza timezone), `servizio`, `costo` finito, `valuta`, `estimated` booleano. Crediti negativi sono conservati. Il pivot completa i giorni mancanti con zero (ipotesi esplicita di assenza di costi); conserva le date Estimated negli attributi. Per prudenza, un allarme non è valutato se il suo prefisso contiene qualsiasi data Estimated: non si comprimono i giorni né si sostituiscono i provvisori con zeri. Il job sceglie come ultimo giorno candidato quello disponibile non successivo a oggi meno due giorni.
 

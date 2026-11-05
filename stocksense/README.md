@@ -1,6 +1,6 @@
 # StockSense
 
-Documentazione: [guida operativa e API](docs/OPERATIONS.md) · [contratti](SPEC.md).
+Documentazione: [guida operativa](docs/OPERATIONS.md) · [API HTTP](docs/API.md) · [contratti](SPEC.md).
 
 Previsioni giornaliere di vendita, proposte di riordino e confronto delle politiche di magazzino. Progetto Python autonomo: nessun import dagli altri progetti del portfolio.
 
@@ -8,7 +8,7 @@ Previsioni giornaliere di vendita, proposte di riordino e confronto delle politi
 
 ## Avvio rapido
 
-Python 3.11+, dalla cartella `stocksense/`:
+Python 3.11+ e Node 22 (non necessario sull'host usando Docker), dalla cartella `stocksense/`:
 
 ```bash
 python -m venv .venv
@@ -17,7 +17,9 @@ python -m venv .venv
 pip install -e .
 pytest -q
 python scripts/run_backtest.py --quick --data synthetic --model baseline --output results/smoke-baseline
-streamlit run app/streamlit_app.py
+npm --prefix web ci
+npm --prefix web run build
+python -m uvicorn stocksense.api:app --host 127.0.0.1 --port 8501
 ```
 
 Non servono token, pesi o connessione dopo l'installazione. `--quick`: 2 SKU, 2 fold di 28 giorni, passo 28, simulazione 28 giorni. Senza `--quick`: 50 SKU, 8 fold di 30 giorni, passo 30, simulazione degli ultimi 180 giorni. Il primo fit AutoETS può includere compilazione Numba.
@@ -43,7 +45,7 @@ Le taglie aggiungono Timestral alle tre baseline, non le sostituiscono. L'adapte
 
 ## Dati e assenza di leakage
 
-Dataset [Online Retail II, UCI](https://archive.ics.uci.edu/dataset/502/online+retail+ii), DOI 10.24432/C5CG6D, licenza CC BY 4.0. Il file locale atteso è `data/raw/online_retail_II.xlsx`: 1.067.371 righe su due fogli nel download fornito. `converti_una_volta` concatena **tutti** i fogli, stabilizza gli identificatori e invalida la cache parquet tramite SHA256. Anche la cache Streamlit è indicizzata dall'hash corrente del file: sostituire l'Excel aggiorna dati e ordini senza riavvio. Il file grezzo non è versionato. Download facoltativo esplicito:
+Dataset [Online Retail II, UCI](https://archive.ics.uci.edu/dataset/502/online+retail+ii), DOI 10.24432/C5CG6D, licenza CC BY 4.0. Il file locale atteso è `data/raw/online_retail_II.xlsx`: 1.067.371 righe su due fogli nel download fornito. `converti_una_volta` concatena **tutti** i fogli, stabilizza gli identificatori e invalida la cache parquet tramite SHA256. Anche la cache del backend HTTP è indicizzata dall'hash corrente del file: sostituire l'Excel aggiorna dati e ordini senza riavvio. Il file grezzo non è versionato. Download facoltativo esplicito:
 
 ```bash
 python -c "from stocksense.ingest import download_uci; download_uci()"
@@ -58,7 +60,7 @@ python -c "from stocksense.ingest import download_uci; download_uci()"
 
 ## Riordino e simulazione
 
-`config/prodotti.csv` contiene riga `*` default e possibili righe SKU: lead time 14 giorni, ciclo 7, lotto minimo 1, livello 0,9. Ammessi livelli 0,5/0,9/0,99; tempi e lotti interi positivi. Dashboard: checkbox per sostituire i parametri con quelli della sidebar.
+`config/prodotti.csv` contiene riga `*` default e possibili righe SKU: lead time 14 giorni, ciclo 7, lotto minimo 1, livello 0,9. Ammessi livelli 0,5/0,9/0,99; tempi e lotti interi positivi. Workspace: nella sezione Politica di riordino, checkbox per applicare i parametri globali al posto della configurazione SKU.
 
 Finestra = lead time + ciclo, sempre coperta dall'orizzonte. Disponibilità = giacenza + ordini pendenti. Quantità = fabbisogno meno disponibilità, arrotondata per eccesso e soggetta a **minimo**, non multiplo di lotto. Previsioni negative troncate a zero; inventario/arrivi negativi o non finiti rifiutati. La somma dei quantili marginali è un'euristica, non una copertura nominale garantita. Con baseline scorta di sicurezza quantile = zero.
 
@@ -123,18 +125,20 @@ Quantità frazionarie derivano dall'inizializzazione sintetica della giacenza. N
 - `metadata.json`: origine dati, seed, cutoff, configurazione, modelli, tempi, hash UCI e convenzioni.
 - `vendite_perse.svg`: confronto portabile, senza browser o Kaleido.
 
-Dashboard a tre pagine: **Da fare oggi** (priorità colorata e CSV delle sole righe da ordinare), **Prodotto** (120 giorni grezzi, previsione, banda solo se disponibile, stock senza nuovi arrivi), **Risultati** (CSV e metadati da cartella scelta). La data mostrata è la data dopo la fine dello storico, non necessariamente oggi. Fonte UCI e modelli opzionali richiedono selezione esplicita.
+Workspace React con **Panoramica**, **Piano di riordino** (filtri, ordinamento, paginazione, selezione multipla e CSV), **Catalogo e previsioni** (120 giorni grezzi, banda solo se disponibile e stock senza nuovi arrivi) e **Analisi e simulazioni** (report registrati, ricerca e metadati). Tema chiaro/scuro e parametri persistono nel browser. La data decisionale segue la fine dello storico, non necessariamente oggi. UCI richiede un file locale; non viene scaricato dal browser.
 
 ## Test, CI e Docker
 
-Suite finale Docker con pesi reali abilitati: **70 test passati**. La suite offline esclude i due test di integrazione modello. Verifica ritardi, pendenti, stockout senza backlog, stessi stock iniziali, cutoff, target grezzi, clipping, fogli Excel/cache, adapter e tutte le pagine Streamlit via AppTest.
+Suite Docker con pesi reali abilitati: **75 test Python passati**, più **3 test Chromium** desktop/mobile. La suite offline esclude i due test di integrazione modello. Copre dominio, cache Excel, API, filtri, selezione ed esportazione riordini, dettaglio prodotto, report ed errori recuperabili.
+
+Da `web/`, con API già avviata su 8501: `npm run test:e2e` dopo `npx playwright install chromium`. `START_API=1` avvia l'API tramite Playwright quando la porta è libera. Healthcheck `/api/health`, OpenAPI `/docs`. Nessuna autenticazione: uso solo locale.
 
 ```bash
 docker build --build-arg INSTALL_MODEL=true -t stocksense .
 docker run --rm -p 127.0.0.1:8502:8501 stocksense
 ```
 
-`.github/workflows/test.yml` esegue test e CLI smoke nel repository **esportato con stocksense come radice**. GitHub non esegue workflow annidati nel monorepo: la CI radice va configurata dal proprietario del monorepo, non da questo progetto autonomo.
+`.github/workflows/test.yml` esegue test Python, CLI smoke, build React e test browser nel repository **esportato con stocksense come radice**. GitHub non esegue workflow annidati nel monorepo: la CI radice va configurata dal proprietario del monorepo, non da questo progetto autonomo.
 
 ## Limiti e lavoro futuro
 

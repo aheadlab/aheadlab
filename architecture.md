@@ -7,7 +7,14 @@ status: draft
 ---
 # Architettura
 
-`cloudguard/`, `stocksense/`, `solarcast/` sono repository esportabili, senza dipendenze runtime fra loro. Ogni package usa layout src, dashboard Streamlit, script CLI, test e Dockerfile locali. Docker Compose nella radice è solo una comodità di sviluppo.
+`cloudguard/`, `stocksense/`, `solarcast/` sono repository esportabili, senza dipendenze runtime fra loro. Ogni package usa layout src, backend FastAPI, frontend React/TypeScript, script CLI, test e Dockerfile locali. Docker Compose nella radice è solo una comodità di sviluppo.
+
+## Confine web
+Ogni frontend dipende solo dall'API del proprio progetto: i componenti comuni sono copie locali, non un package condiviso a runtime. Docker compila il frontend con Node e serve gli asset statici dalla stessa origine FastAPI; il processo Python non richiede Node. Questo conserva l'esportabilità dei repository e separa l'interazione browser dalla logica previsionale già testata.
+
+Le API sono workspace locali senza autenticazione, esposte solo su loopback nella configurazione fornita. Uvicorn usa un processo: il limite di un calcolo concorrente è per processo, con risposta 409 anziché accodamento illimitato. La cancellazione del fetch non interrompe un'inferenza in corso. Parametri fuori contratto sono rifiutati; errori upstream non espongono dettagli sensibili e valori numerici non finiti diventano null. I report sono identificati tramite un registro delle cartelle risultati, mai tramite percorsi arbitrari del client. I dettagli giornalieri voluminosi di inventario e anomalie restano artefatti locali.
+
+Le impostazioni UI persistono nel browser, non costituiscono stato multiutente. Errori e ricalcoli non trasformano i risultati precedenti in nuove previsioni; parametri non applicati sono segnalati. Test HTTP verificano i contratti e test Chromium esercitano i flussi desktop/mobile, oltre ai test di dominio e modello.
 
 ## Modelli e valutazione
 Timestral è importato solo in `forecaster.py`; la libreria ufficiale è fissata al commit `a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff`. Il contratto restituisce cinque vettori 1D ordinati, anche per un singolo passo. L'input è copiato prima del modello per accettare array read-only (per esempio da pandas) senza condividerne memoria modificabile con PyTorch. Gli errori non causano fallback silenziosi. Le baseline sono esplicitamente nominate. Test unitari senza rete e test di integrazione con pesi reali restano distinti.

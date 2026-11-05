@@ -1,21 +1,24 @@
 # Verifiche eseguite e limiti
 
-Lavoro verificato nel Docker Linux locale il 27–28 ottobre 2026, Python 3.11.18, CPU. I controlli locali non attestano funzionamento su account esterni o deployment pubblico.
+Lavoro verificato nel Docker Linux locale, Python 3.11, CPU. I benchmark del 27–28 ottobre 2026 restano invariati; la migrazione web verifica separatamente API, frontend e distribuzione. I controlli locali non attestano funzionamento su account esterni o deployment pubblico.
 
 ## Test finali
 
-- Sorgenti finali in `aheadlab-test`, `RUN_MODEL_TESTS=1 pytest -q`: **CloudGuard 60, StockSense 70, SolarCast 55 test passati** (185 totali).
-- Build standalone via Docker Compose: tre immagini costruite, senza import o dipendenze tra i progetti.
-- Runner `scripts/test_all.py --models`: **185 test passati anche nelle immagini finali**, non-root, cache Hugging Face condivisa scrivibile. Restano warning non bloccanti su alias calendario pandas deprecati.
-- `scripts/test_dashboards.py --models`: navigazione delle tre dashboard con Timestral reale; SolarCast verificato sia A sia B. AppTest, non browser visuale.
-- `docker compose up --no-build`: tre servizi avviati; `/_stcore/health` su localhost 8501, 8502, 8503 → **HTTP 200, ok**.
+- `npm run build` nei tre frontend: TypeScript e bundle React compilati con Node 22, senza warning di dimensione chunk.
+- Build multistadio via Docker Compose: tre immagini FastAPI/React, senza Streamlit, Node a runtime o dipendenze incrociate.
+- `python scripts/test_all.py --models`: **CloudGuard 65, StockSense 75, SolarCast 60 test passati** (200 totali), con modelli reali e utente non-root. Restano warning non bloccanti di deprecazione pandas.
+- `python scripts/test_dashboards.py --models`: **9 flussi Chromium passati** su immagini finali, desktop 1440 px/mobile 390 px, più tre richieste HTTP Timestral 5M reali (SolarCast B). Comprendono CSV, filtri, selezione ordini, dettagli, report, recupero da errori e consenso PVGIS. Gli errori di rete sono simulati deliberatamente nei test dedicati.
+- Screenshot generati in `web/test-results/` di ciascun progetto, ignorati da Git. CloudGuard desktop e SolarCast mobile controllati visivamente.
+- `docker compose up -d --wait --wait-timeout 120`: tre servizi healthy, `/api/health` su localhost 8501/8502/8503 → **HTTP 200**. HTML e asset React serviti dalla stessa API.
 - Spec graph validato; nessun dato grezzo, peso, cache Python o `.env` reale incluso nei file esportabili.
 
-Sono stati aggiunti test di regressione per dati AWS provvisori senza gruppi, selezione servizi prima del target, calendari di valutazione invertiti/duplicati/incompleti, invalidazione della cache dashboard al cambio Excel, e copia degli array NumPy read-only prima del passaggio a PyTorch. Nessun test rimosso per ottenere il verde.
+Sono stati aggiunti test di regressione per dati AWS provvisori senza gruppi, selezione servizi prima del target, calendari di valutazione invertiti/duplicati/incompleti, invalidazione della cache dashboard al cambio Excel, e copia degli array NumPy read-only prima del passaggio a PyTorch. I test della vecchia UI sono stati sostituiti con test API e browser; la regressione sul cambio Excel rimane coperta via HTTP. Non sono stati disattivati contratti di dominio per ottenere il verde.
 
 ## Esportazione indipendente
 
-`scripts/export_repos.py` provato in una cartella temporanea esterna: 153 file esportati, senza Excel, pesi o `.env` reale. Test eseguiti montando **un solo repository per container**, senza accesso alle altre cartelle: CloudGuard 58 passati + 2 integrazioni saltate, StockSense 68 + 2, SolarCast 53 + 2. Dimostra che non dipendono dal workspace padre.
+`scripts/export_repos.py` provato in una cartella esterna: **203 file esportati**, senza Excel, pesi, node_modules, risultati dei test browser o `.env` reale. Ogni cartella esportata è stata costruita con il proprio Dockerfile, senza Timestral: CloudGuard **63 passati + 2 saltati**, StockSense **73 + 2**, SolarCast **58 + 2**. Verificati inoltre HTML/asset compilati, healthcheck, previsioni baseline, errore 503 per modello assente e impossibilità di importare gli altri due progetti.
+
+I workflow standalone includono ora build frontend e Playwright con avvio dell'API. Non sono state avviate esecuzioni GitHub Actions remote; le prove riportate sono locali.
 
 ## Timestral reale
 
@@ -77,7 +80,8 @@ Dati pubblici PVGIS v5_3 e Open-Meteo effettivamente scaricati per Varese 2022�
 ## Non verificato / non realizzato
 
 - Nessun accesso AWS reale, messaggio Telegram, account Shopify o inverter.
-- Nessun deploy pubblico, repo remoto, sito GitHub Pages o screenshot di browser.
+- Nessun deploy pubblico, sito GitHub Pages o repository remoto dedicato ai singoli prodotti. Il monorepo era stato pubblicato prima della migrazione; questa migrazione non è stata inviata con un nuovo push.
+- Nessuna autenticazione, isolamento multiutente o validazione per esposizione pubblica delle API locali.
 - CloudGuard non recupera automaticamente giorni saltati perché provvisori e non deduplica gli invii: serve uno stato persistente per produzione.
 - SolarCast operativo richiede storico recente fornito dall'utilizzatore. Il modello non trasforma PVGIS storico in misure attuali.
 - Nessuna garanzia commerciale o di calibrazione dei quantili aggregati.

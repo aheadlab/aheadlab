@@ -10,12 +10,16 @@ python -m venv .venv
 # PowerShell: .venv\Scripts\Activate.ps1
 pip install -e .
 python -m cloudguard.daily
-streamlit run app/streamlit_app.py
+npm --prefix web ci
+npm --prefix web run build
+python -m uvicorn cloudguard.api:app --host 127.0.0.1 --port 8501
 ```
 
-La CLI stampa JSON per i servizi sintetici; non contatta AWS né invia messaggi. La data della demo è fissa, non quella del computer. La dashboard parte in baseline: scegliere un servizio, osservare storico/previsione e modificare il cutoff per vedere un mese non ancora concluso. La pagina Risultati permette di scegliere baseline o `timestral-full`.
+La CLI stampa JSON per i servizi sintetici; non contatta AWS né invia messaggi. La data della demo è fissa, non quella del computer. Al primo accesso il workspace React parte in baseline: scegliere servizio, modello e orizzonte, quindi premere Applica parametri. Il cutoff è in Contesto della simulazione. Costi per servizio apre la previsione selezionata; Centro anomalie filtra e mostra il dettaglio delle segnalazioni; Analisi e benchmark legge i report registrati, come baseline e `timestral-full`. Selezioni e tema sono salvati nel browser.
 
 Per Timestral installare prima PyTorch CPU e `requirements-model.txt`, come nel README. Un errore di caricamento non causa un fallback nascosto.
+
+L'avvio locale richiede Node 22 per il build; Docker non richiede Node sull'host. UI su http://127.0.0.1:8501, OpenAPI su `/docs`. Il [contratto HTTP](API.md) è distinto dalle API Python seguenti. In caso di errore, i risultati precedenti restano visibili e Riprova riavvia la richiesta; il backend accetta un solo calcolo alla volta (409 se occupato). Cambiare pagina non cancella un'inferenza già iniziata.
 
 ## 2. Uso Python e schema dei dati
 
@@ -92,4 +96,4 @@ docker run --rm -p 127.0.0.1:8501:8501 cloudguard
 docker run --rm cloudguard pytest -q
 ```
 
-Il container parte come utente non-root. Per conservare i pesi tra avvii aggiungere un volume su `/home/app/.cache/huggingface`. Non copiare `.env`, dati privati, cache o pesi nel repository. I workflow annidati diventano attivi solo quando `cloudguard/` è la radice del repository GitHub; quello daily incluso resta una demo sintetica senza invio.
+Il build multistadio compila React e il container non-root serve UI e API sulla stessa porta. Non contiene Streamlit né richiede Node a runtime. Healthcheck `/api/health`. API senza autenticazione, da esporre solo su localhost. Per conservare i pesi tra avvii aggiungere un volume su `/home/app/.cache/huggingface`. Non copiare `.env`, dati privati, cache o pesi nel repository. I workflow annidati diventano attivi solo quando `cloudguard/` è la radice del repository GitHub; quello daily incluso resta una demo sintetica senza invio.

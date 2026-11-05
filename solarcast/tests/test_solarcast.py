@@ -123,8 +123,9 @@ def test_backtest_and_dry_run(tmp_path, monkeypatch):
 
 
 def test_app():
-    from streamlit.testing.v1 import AppTest
-    app = AppTest.from_file(Path(__file__).resolve().parents[1] / 'app/streamlit_app.py').run(timeout=30)
-    assert not app.exception
-    app.sidebar.radio[0].set_value('Risultati').run()
-    assert not app.exception
+    from fastapi.testclient import TestClient
+    from solarcast.api import app
+    client = TestClient(app)
+    assert client.get('/api/health').json() == {'status': 'ok', 'app': 'solarcast'}
+    assert client.post('/api/forecast', json={}).status_code == 200
+    assert client.get('/api/reports').status_code == 200

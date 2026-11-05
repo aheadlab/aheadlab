@@ -2,7 +2,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import pytest
-from streamlit.testing.v1 import AppTest
+from fastapi.testclient import TestClient
+from stocksense import api
 from stocksense import ingest
 from stocksense.demo import synthetic_transactions
 from stocksense.backtest import rolling_backtest
@@ -27,22 +28,24 @@ def test_evaluation_rejects_invalid_calendar(kind):
         simulate(daily, 60, ['moving_average'])
 
 
-def test_dashboard_refreshes_changed_excel_without_clearing_cache(tmp_path, monkeypatch):
+def test_api_refreshes_changed_excel_without_clearing_cache(tmp_path, monkeypatch):
     raw, cached = tmp_path/'retail.xlsx', tmp_path/'retail.parquet'
     frame = synthetic_transactions(days=400, products=1)
     frame.to_excel(raw, index=False)
     fingerprint = ingest.source_fingerprint
     convert = ingest.converti_una_volta
-    monkeypatch.setattr(ingest, 'source_fingerprint', lambda path=raw: fingerprint(path))
-    monkeypatch.setattr(ingest, 'converti_una_volta', lambda: convert(raw, cached))
-    app = AppTest.from_file(Path(__file__).resolve().parents[1]/'app/streamlit_app.py').run(timeout=30)
-    app.sidebar.selectbox[0].set_value('uci').run(timeout=30)
-    assert not app.exception
+    monkeypatch.setattr(api, 'source_fingerprint', lambda path: fingerprint(raw))
+    monkeypatch.setattr(api, 'converti_una_volta', lambda *args: convert(raw, cached))
+    api.dataset.cache_clear()
+    client = TestClient(api.app)
+    response = client.post('/api/forecast', json={'source': 'uci'})
+    assert response.status_code == 200
     first = frame.InvoiceDate.max()+pd.Timedelta(days=1)
-    assert any(str(first.date()) in c.value for c in app.caption)
+    assert pd.Timestamp(response.json()['as_of']) == first
     frame.InvoiceDate += pd.Timedelta(days=30)
     frame.to_excel(raw, index=False)
-    app.run(timeout=30)
-    assert not app.exception
+    response = client.post('/api/forecast', json={'source': 'uci'})
+    assert response.status_code == 200
     second = frame.InvoiceDate.max()+pd.Timedelta(days=1)
-    assert any(str(second.date()) in c.value for c in app.caption)
+    assert pd.Timestamp(response.json()['as_of']) == second
+    api.dataset.cache_clear()

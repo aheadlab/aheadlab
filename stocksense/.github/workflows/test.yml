@@ -11,3 +11,16 @@ jobs:
       - run: pip install -e .
       - run: pytest -q
       - run: python scripts/run_backtest.py --quick --output results/smoke-baseline
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci && npm run build
+        working-directory: web
+      - run: npx playwright install --with-deps chromium
+        working-directory: web
+      - run: npm run test:e2e
+        working-directory: web
+        env:
+          START_API: '1'

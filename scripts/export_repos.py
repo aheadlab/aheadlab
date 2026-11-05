@@ -20,7 +20,10 @@ def main():
     files = subprocess.check_output(
         ['git', 'ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', *PROJECTS],
         cwd=root).decode('utf-8').split('\0')
-    selected = sorted(set(name for name in files if name))
+    deleted = set(subprocess.check_output(
+        ['git', 'ls-files', '-z', '--deleted', '--', *PROJECTS],
+        cwd=root).decode('utf-8').split('\0'))
+    selected = sorted(set(name for name in files if name and name not in deleted))
     if not selected:
         parser.error('No project files found')
     for name in selected:
