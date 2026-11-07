@@ -1,12 +1,19 @@
-# aheadlab — tre progetti pronti in locale
+# aheadlab — quattro progetti in locale
 
-Tre applicazioni autonome di previsione su CPU, realizzate a partire da [`PROGETTI.md`](PROGETTI.md). Ogni cartella ha package Python, frontend React/TypeScript, API FastAPI, Dockerfile, test, workflow standalone, licenza e risultati riproducibili. Non ci sono import fra i progetti.
+Quattro applicazioni di previsione su CPU. Le prime tre derivano da [`PROGETTI.md`](PROGETTI.md); Capacity Planner estende la ricerca al traffico di rete reale e al dimensionamento delle risorse. Ogni cartella contiene package Python, frontend React/TypeScript, API FastAPI, Dockerfile, test, licenza e risultati. Non ci sono import runtime fra i progetti.
 
 | Progetto | Applicazione | Dashboard locale |
 |---|---|---|
 | [CloudGuard](cloudguard/README.md) | Costi cloud, stima mensile, anomalie | http://localhost:8501 |
 | [StockSense](stocksense/README.md) | Vendite, riordini CSV e simulazione scorte | http://localhost:8502 |
 | [SolarCast](solarcast/README.md) | Fotovoltaico, meteo e fasce di autoconsumo | http://localhost:8503 |
+| [Capacity Planner](capacityplanner/README.md) | Traffico reale, capacità oraria e verifica del vantaggio AI | http://localhost:8504 |
+
+Capacity Planner si avvia separatamente con `docker compose -f capacityplanner/compose.yaml up -d --build --wait`.
+Il Compose principale continua a gestire solo i tre progetti originali.
+La [nuova ricerca](capacityplanner/docs/RESEARCH.md) misura un MAE del 28M inferiore
+del 20,79% a ETS su CESNET, ma non conferma il criterio di risparmio operativo.
+La [scheda portfolio](PORTFOLIO_RICERCA.md) raccoglie risultati e limiti dei quattro casi.
 
 ## Documentazione per sottoprogetto
 

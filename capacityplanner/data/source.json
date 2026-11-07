@@ -1,0 +1,8 @@
+{
+  "url": "https://zenodo.org/api/records/23296272/files/CESNET-TimeSeries24-institutions-hour.h5/content",
+  "sha256": "1b9ecc4b08e768fa7374d064d96e3fd626640487f1973e2d248f7d02cb91a838",
+  "bytes": 156206976,
+  "license": "CC-BY-4.0",
+  "citation": "CESNET-TimeSeries24, https://doi.org/10.1038/s41597-025-04603-x",
+  "distribution": "CESNET TS-Zoo HDF5 distribution, Zenodo record 23296272"
+}

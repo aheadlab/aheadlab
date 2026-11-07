@@ -1,0 +1,25 @@
+{
+  "label": "secondary descriptive forecast analysis; comparison fixed by original selection",
+  "ai": "28M",
+  "baseline": "ets",
+  "accuracy": {
+    "mae": {
+      "reduction_pct": 20.79024660118397,
+      "ci95": [
+        15.05100383041328,
+        26.58052686934982
+      ]
+    },
+    "mase": {
+      "reduction_pct": 25.67511411202137,
+      "ci95": [
+        16.42413303178468,
+        34.786906336899186
+      ]
+    }
+  },
+  "institutions_with_lower_mae": 12,
+  "complete_test_pairs": 335,
+  "primary_arithmetic_and_intervals_rechecked": true,
+  "frozen_sources_unchanged": true
+}

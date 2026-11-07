@@ -1,0 +1,15 @@
+{
+  "phases": [
+    "audit",
+    "solar"
+  ],
+  "services_unchanged": true,
+  "existing_services": 8,
+  "min_host_available_gib": 10.72149658203125,
+  "limits": {
+    "memory_gib": 2,
+    "cpu": 1,
+    "network": "none",
+    "extra_swap": 0
+  }
+}

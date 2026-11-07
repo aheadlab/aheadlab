@@ -1,0 +1,14 @@
+{
+  "phases": [
+    "inspect"
+  ],
+  "services_unchanged": true,
+  "existing_services": 8,
+  "min_host_available_gib": 7.576637268066406,
+  "limits": {
+    "memory_gib": 2,
+    "cpu": 1,
+    "network": "none",
+    "extra_swap": 0
+  }
+}

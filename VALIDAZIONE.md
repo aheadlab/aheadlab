@@ -1,0 +1,104 @@
+# Piano di validazione scientifica
+
+Avvio: 5 novembre 2026. Commit applicativo di riferimento: d7a0921.
+
+## Vincoli e risorse
+
+I tre prodotti sono esempi frontend: nessuna modifica a UI, API, logica runtime,
+immagini o configurazione dei servizi attivi. Esperimenti in `validation/`;
+risultati nuovi separati dai report già usati dalle demo. Nessun arresto o riavvio
+di container esistenti. Nessuna pubblicazione automatica.
+
+Controllo iniziale: Windows 31,3 GiB totali, 9,7 GiB liberi; Docker 23,47 GiB;
+Linux MemAvailable circa 20,94 GiB (include cache recuperabile). Otto container
+attivi, circa 1,4 GiB complessivi nel campione docker stats. Questi valori sono
+istantanee, non garanzie sulla disponibilità futura.
+
+Esecuzione: un solo container temporaneo, 2 GiB RAM, swap aggiuntivo disabilitato,
+1 CPU, duecentocinquantasei processi massimi, rete disabilitata. Repository e
+cache modelli in sola lettura; scrittura limitata alla cartella risultati e al
+filesystem temporaneo del container. Controllare memoria host e stato dei
+servizi durante e dopo i job. Se il margine si riduce, interrompere esclusivamente
+il job di validazione. Non scaricare modelli più grandi per questa fase.
+
+## Protocollo deciso prima dei nuovi esperimenti
+
+I periodi esistenti sono già stati esaminati: questa è una validazione esplorativa,
+non un nuovo test cieco. Non selezionare parametri sul risultato finale.
+
+1. Eseguire le suite esistenti su copie isolate delle immagini, usando il codice
+   del workspace in sola lettura. Distinguere test software da evidenza scientifica.
+2. StockSense: riprodurre il benchmark 5M su 50 SKU e otto finestre, aggiungere
+   mediana mobile e Croston-SBA; confrontare MAE e risultati per SKU/finestra.
+   Riordino: stessa politica per tutti, con errori cumulati di training per
+   costruire la scorta, livelli di quantile fissati 0,5/0,8/0,9; stessa giacenza
+   iniziale, lead time 14, revisione 7. Analizzare vendite perse rispetto a
+   giacenza; non attribuire un ROI senza costi economici forniti. La calibrazione
+   usa sei finestre da 21 giorni precedenti l'inizio della simulazione ed è
+   congelata durante il test. È piccola: non promette copertura nominale.
+3. CloudGuard: quantificare vantaggi per servizio/orizzonte, dipendenza fra fold,
+   ritardo del primo allarme ed eventi; estendere a più seed e cambiamenti
+   graduali/legittimi prima di trarre conclusioni operative.
+4. SolarCast: distinguere giorno 1/2 e stagioni; intervalli sul confronto tramite
+   ricampionamento temporale a blocchi. Aggiungere regressione con stesse
+   covariate e storico dell'AI. Nessun risultato oracle è chiamato operativo.
+5. Pubblicare risultati favorevoli e sfavorevoli, hash dei dati e revisioni dei
+   pesi, comandi, limiti e stato effettivo di ciascun esperimento.
+
+## Criteri di decisione
+
+- Previsione: MAE inferiore alla migliore baseline rilevante; riportare dimensione
+  e stabilità del vantaggio, senza contare righe correlate come indipendenti.
+- Inventario: confrontare la frontiera giacenza/vendite perse; dominanza solo se
+  entrambe non peggiorano. Nessun equivalente fra giacenza in pezzi e capitale.
+- Allarmi: recall per evento, ritardo, falsi allarmi e persistenza; recall per
+  giorno da solo non decide l'utilità.
+- Solare: energia giornaliera e profilo orario distinti. Per autoconsumo serve
+  successivamente una simulazione di carico/tariffe con dati misurati.
+
+## Fase successiva dipendente da nuovi dati
+
+Secondo dataset retail con periodo finale non esplorato; costi cloud reali con
+incidenti annotati; produzione inverter e meteo archiviato per data di emissione.
+Soglia economica minima da decidere sul caso concreto. Senza questi dati non è
+possibile concludere che i prodotti generino risparmio in produzione.
+
+## Stato
+
+Prima fase completata: 194 test software passati; benchmark retail 5M riprodotto,
+baseline e politiche di scorta comuni eseguite; quattro regressioni solari
+ricalcolate; stress test cloud su tre seed completato. Artefatti controllati.
+Otto servizi invariati; minimo RAM host campionato 9,01 GiB.
+
+Esiti, limiti e prove ancora aperte: [validation/RESULTS.md](validation/RESULTS.md).
+La fase operativa con dati reali nuovi non è completata né sostituita dai test.
+
+## Quarto progetto: Capacity Planner
+
+Sviluppo e benchmark completati il 6–7 novembre 2026. Nuova cartella autonoma,
+dashboard React/FastAPI, Compose separato su localhost:8504; tre frontend
+precedenti intatti. Protocollo fissato prima del test in
+[capacityplanner/docs/PROTOCOL.md](capacityplanner/docs/PROTOCOL.md).
+
+Dataset pubblico CESNET: dodici istituzioni selezionate sul training,
+calibrazione/selezione/test separati. Confronto reale di 5M/28M con sette metodi
+classici, 19 test Python passati e tre test browser passati. Verificate anche
+due inferenze reali attraverso l'API finale.
+
+Esito: MAE del 28M inferiore del 20,79% a ETS; vantaggio operativo del piano
+non dimostrato (capacità −6,30%, deficit oltre soglia). Nessuna modifica del
+protocollo per ottenere un esito favorevole. Analisi secondaria esplicitamente
+etichettata. [Report](capacityplanner/docs/RESEARCH.md).
+
+Durante preparazione/test/benchmark: limite 2 GiB, 1 CPU, zero rete e swap
+aggiuntivo; RAM host libera minima campionata 7,06 GiB. Gli otto servizi
+preesistenti sono invariati anche dopo l'avvio del quarto progetto.
+
+Il 7 novembre, su richiesta dell'utente, Capacity Planner è stato arrestato
+con `docker compose -f capacityplanner/compose.yaml stop capacityplanner`.
+Dashboard e modelli caricati risiedevano nello stesso container: l'arresto
+termina entrambi. Prima dello stop il container occupava circa 352 MiB;
+il consumo complessivo della macchina non era attribuibile a quel solo servizio.
+Gli altri otto container sono stati lasciati attivi. Dati e pesi restano su
+disco per un eventuale riavvio; non rimane un processo Timestral separato
+avviato da questo progetto.

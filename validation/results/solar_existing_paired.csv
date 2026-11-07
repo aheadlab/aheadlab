@@ -1,0 +1,9 @@
+lead_day,metric,mean,low,high,n,block,sign
+1,daily_energy_mae,0.0935835246033724,0.048201028124456,0.1436289326866144,364,7,positive favors B; daytime metric here equally weights days
+1,daily_energy_mae,0.0935835246033724,0.029298180645235428,0.1580298324361242,364,28,positive favors B; daytime metric here equally weights days
+1,daytime_mae,0.034376860805561536,0.030401635912051802,0.03837241453690133,364,7,positive favors B; daytime metric here equally weights days
+1,daytime_mae,0.034376860805561536,0.02927952940161911,0.039821837122365894,364,28,positive favors B; daytime metric here equally weights days
+2,daily_energy_mae,-0.13492108508054182,-0.1971931882574503,-0.0706224246047777,364,7,positive favors B; daytime metric here equally weights days
+2,daily_energy_mae,-0.13492108508054182,-0.2103632489122369,-0.05485647990223335,364,28,positive favors B; daytime metric here equally weights days
+2,daytime_mae,0.015340574752953072,0.009869937054620801,0.021251477956966212,364,7,positive favors B; daytime metric here equally weights days
+2,daytime_mae,0.015340574752953072,0.008525236881212137,0.02196282523971918,364,28,positive favors B; daytime metric here equally weights days

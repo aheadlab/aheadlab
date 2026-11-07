@@ -1,0 +1,4 @@
+model,mean,low,high,n,block,wins,ties,caveat
+5M,8.374173385620628,6.115015233780939,10.957361685003113,50,1,340,1,SKU-cluster only; shared retailer shocks remain
+28M,8.69742404644708,6.446727458236082,11.1814413420352,50,1,351,1,SKU-cluster only; shared retailer shocks remain
+209M,9.16383576993416,6.7839522296983175,11.689342822519574,50,1,354,1,SKU-cluster only; shared retailer shocks remain

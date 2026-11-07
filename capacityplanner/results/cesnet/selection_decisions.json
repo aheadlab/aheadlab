@@ -1,0 +1,70 @@
+{
+  "models": {
+    "last": {
+      "model": "last",
+      "level": 1.0,
+      "unit_hours": 72365.0,
+      "deficit_fraction": 0.04064155759063906
+    },
+    "daily": {
+      "model": "daily",
+      "level": 1.0,
+      "unit_hours": 72291.0,
+      "deficit_fraction": 0.039245700839751534
+    },
+    "weekly": {
+      "model": "weekly",
+      "level": 1.0,
+      "unit_hours": 63325.0,
+      "deficit_fraction": 0.04021116021803582
+    },
+    "weekly_mean": {
+      "model": "weekly_mean",
+      "level": 1.0,
+      "unit_hours": 64491.0,
+      "deficit_fraction": 0.04167799815004055
+    },
+    "ets": {
+      "model": "ets",
+      "level": 1.0,
+      "unit_hours": 69450.0,
+      "deficit_fraction": 0.03715017839422942
+    },
+    "mstl": {
+      "model": "mstl",
+      "level": 1.0,
+      "unit_hours": 66526.0,
+      "deficit_fraction": 0.037680165668625074
+    },
+    "ridge": {
+      "model": "ridge",
+      "level": 1.0,
+      "unit_hours": 65876.0,
+      "deficit_fraction": 0.04046337948955029
+    },
+    "5M": {
+      "model": "5M",
+      "level": 1.0,
+      "unit_hours": 64450.0,
+      "deficit_fraction": 0.040904691542984144
+    },
+    "28M": {
+      "model": "28M",
+      "level": 1.0,
+      "unit_hours": 64812.0,
+      "deficit_fraction": 0.04055890218307416
+    }
+  },
+  "primary_ai": {
+    "model": "28M",
+    "level": 1.0,
+    "unit_hours": 64812.0,
+    "deficit_fraction": 0.04055890218307416
+  },
+  "primary_baseline": {
+    "model": "ets",
+    "level": 1.0,
+    "unit_hours": 69450.0,
+    "deficit_fraction": 0.03715017839422942
+  }
+}

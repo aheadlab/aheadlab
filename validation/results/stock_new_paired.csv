@@ -1,0 +1,10 @@
+metric,baseline,mean,low,high,n,block,positive
+mae,auto_ets,8.37417486696493,6.115018146592378,10.957364458771814,50,1,favors 5M for absolute errors; signed error is descriptive
+mae,rolling_median,3.914749350821288,2.818393031738131,5.241024348023849,50,1,favors 5M for absolute errors; signed error is descriptive
+mae,croston_sba,11.919219498402844,9.643815883804994,14.412675378368423,50,1,favors 5M for absolute errors; signed error is descriptive
+cumulative_abs_error,auto_ets,-229.10778370437794,-311.0854722749812,-150.2236560420206,50,1,favors 5M for absolute errors; signed error is descriptive
+cumulative_abs_error,rolling_median,129.74151700896212,85.20694220705936,181.2243238162926,50,1,favors 5M for absolute errors; signed error is descriptive
+cumulative_abs_error,croston_sba,-173.63832585592405,-265.14937452925204,-80.72394008319364,50,1,favors 5M for absolute errors; signed error is descriptive
+signed_error,auto_ets,24.506097049906302,19.399274293684297,29.597085124006497,50,1,favors 5M for absolute errors; signed error is descriptive
+signed_error,rolling_median,-4.89016579099403,-6.851769453963721,-3.1959881063429645,50,1,favors 5M for absolute errors; signed error is descriptive
+signed_error,croston_sba,21.462028010748373,16.329792548985214,26.894718354396836,50,1,favors 5M for absolute errors; signed error is descriptive

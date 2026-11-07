@@ -1,0 +1,5 @@
+FROM aheadlab-stocksense:latest
+USER root
+RUN python -m pip install 'tables>=3.10,<4'
+RUN python -m pip install 'matplotlib>=3.8,<4'
+USER app

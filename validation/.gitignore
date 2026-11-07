@@ -1,0 +1,5 @@
+__pycache__/
+results/services_*.json
+results/*.command.json
+results/memory*.json
+results/stock_equal_policy_ledger.csv

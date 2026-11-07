@@ -1,0 +1,13 @@
+{
+  "revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "seeds": [
+    7,
+    17,
+    29
+  ],
+  "services": 3,
+  "days": 360,
+  "anomaly_days": 260,
+  "scenarios": "1.7x spike 3d; 5-45% ramp 21d; legitimate 25% permanent step at day 280",
+  "limitation": "Synthetic stress test; legitimate step not supplied to either detector; minimum excess 5 USD"
+}

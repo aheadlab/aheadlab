@@ -1,0 +1,11 @@
+.....................................ss.....................             [100%]
+=============================== warnings summary ===============================
+tests/test_api.py::test_scale_and_oracle
+tests/test_solarcast.py::test_forecast_validation_and_training_only
+tests/test_solarcast.py::test_covariate_contract
+tests/test_solarcast.py::test_backtest_and_dry_run
+  /workspace/solarcast/src/solarcast/demo.py:15: Pandas4Warning: DatetimeIndex.dayofyear is deprecated and will be removed in a future version. Use DatetimeIndex.day_of_year instead.
+    season = np.cos(2*np.pi*(idx.dayofyear.to_numpy()-172)/365.25)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+58 passed, 2 skipped, 4 warnings in 2.24s

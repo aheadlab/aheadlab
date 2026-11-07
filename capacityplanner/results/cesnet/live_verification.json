@@ -1,0 +1,22 @@
+{
+  "real_model_http": {
+    "5M": {
+      "status": "passed",
+      "hours": 24,
+      "unit_hours": 90.0
+    },
+    "28M": {
+      "status": "passed",
+      "hours": 24,
+      "unit_hours": 90.0
+    }
+  },
+  "existing_services": 8,
+  "existing_services_unchanged": true,
+  "new_app_health": "healthy",
+  "limits": {
+    "memory_gib": 2,
+    "cpu": 1
+  },
+  "url": "http://localhost:8504"
+}

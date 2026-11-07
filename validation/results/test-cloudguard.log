@@ -1,0 +1,9 @@
+.................................................ss..............        [100%]
+=============================== warnings summary ===============================
+tests/test_api.py: 20 warnings
+tests/test_domain.py: 15 warnings
+  /workspace/cloudguard/src/cloudguard/synthetic.py:19: Pandas4Warning: DatetimeIndex.dayofweek is deprecated and will be removed in a future version. Use DatetimeIndex.day_of_week instead.
+    y = (base + trend*t) * (1 + weekend*(dates.dayofweek >= 5)) * rng.lognormal(0, noise, giorni)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+63 passed, 2 skipped, 35 warnings in 2.21s

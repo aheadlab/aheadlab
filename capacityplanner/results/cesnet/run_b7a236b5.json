@@ -1,0 +1,14 @@
+{
+  "phases": [
+    "environment"
+  ],
+  "services_unchanged": true,
+  "existing_services": 9,
+  "min_host_available_gib": 5.583000183105469,
+  "limits": {
+    "memory_gib": 2,
+    "cpu": 1,
+    "network": "none",
+    "extra_swap": 0
+  }
+}

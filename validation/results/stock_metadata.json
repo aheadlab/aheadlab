@@ -1,0 +1,20 @@
+{
+  "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "parquet_sha256": "0f6bad0f8fd2b9fa9b6a1879d8603ae5bb7f3a83843e118a607d21846e2b7ecd",
+  "revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "skus": 50,
+  "folds": 8,
+  "simulation_days": 180,
+  "calibration_windows": 6,
+  "quantiles": [
+    0.5,
+    0.8,
+    0.9
+  ],
+  "lead_time": 14,
+  "cycle": 7,
+  "elapsed_seconds": 245.22310757637024,
+  "reproduced_pairs": 400,
+  "max_mae_difference": 0.0004878997802784113,
+  "caveat": "Exploratory known dataset; frozen six-window calibration; not a prospective ROI estimate"
+}

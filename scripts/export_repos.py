@@ -1,10 +1,10 @@
-"""Copy the three repositories without ignored datasets, caches or local secrets."""
+"""Copy the four projects without ignored datasets, caches or local secrets."""
 import argparse
 from pathlib import Path
 import shutil
 import subprocess
 
-PROJECTS = ('cloudguard', 'stocksense', 'solarcast')
+PROJECTS = ('cloudguard', 'stocksense', 'solarcast', 'capacityplanner')
 
 
 def main():

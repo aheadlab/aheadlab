@@ -1,0 +1,21 @@
+model,event,evaluated_days,detected,delay_days
+5M,Amazon EC2-2,3,True,0
+5M,Amazon EC2-3,2,True,0
+5M,Amazon RDS-2,3,True,0
+5M,Amazon RDS-3,1,True,0
+5M,Amazon S3-2,1,True,0
+5M,Amazon S3-3,2,True,0
+5M,AWS Lambda-2,3,True,0
+5M,AWS Lambda-3,3,True,0
+5M,CloudWatch-2,1,True,0
+5M,CloudWatch-3,3,True,0
+mean_3sigma,Amazon EC2-2,3,True,0
+mean_3sigma,Amazon EC2-3,2,True,0
+mean_3sigma,Amazon RDS-2,3,True,0
+mean_3sigma,Amazon RDS-3,1,True,0
+mean_3sigma,Amazon S3-2,1,True,0
+mean_3sigma,Amazon S3-3,2,True,0
+mean_3sigma,AWS Lambda-2,3,True,1
+mean_3sigma,AWS Lambda-3,3,True,0
+mean_3sigma,CloudWatch-2,1,True,0
+mean_3sigma,CloudWatch-3,3,True,0

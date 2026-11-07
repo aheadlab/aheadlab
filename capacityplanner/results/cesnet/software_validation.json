@@ -1,0 +1,10 @@
+{
+  "python_tests": {"passed": 19, "failed": 0, "also_run_inside_final_app_image": true},
+  "browser_tests": {"passed": 3, "failed": 0, "engine": "Chromium", "viewports": ["1440x1000", "390x844"], "covers": ["parameters", "CSV export", "research", "CESNET replay", "dark theme", "mobile navigation", "error recovery"]},
+  "frontend_build": "TypeScript and Vite passed",
+  "visual_review": ["research desktop", "planner mobile", "scientific comparison chart"],
+  "real_http_inference": ["Timestral 5M", "Timestral 28M"],
+  "original_three_projects_modified": false,
+  "production_compose_modified": false,
+  "existing_services_unchanged": 8
+}
