@@ -1,0 +1,249 @@
+{
+  "created_utc": "2026-11-07 16:18:58.781491+00:00",
+  "hashes": {
+    "docs/PROTOCOL_V2.md": "7ec9d0cbbd66bdfec67269fcf1250d787f4a4743c557ba4279e2e65635374227",
+    "src/capacityplanner/core.py": "5ac13f2dd11d6d159d6ba2b4d56a23434805b3abfd1775e1825ce011d38b6802",
+    "src/capacityplanner/policy_v2.py": "885761ab8e12085fcfe5bc2ae303318c581f2bfc63c92e62b0e85122f89c8a8d",
+    "scripts/research_v2.py": "6f79a7a6648bb8a48c58806794e726f7df43c182f816ac0d0285c43c0246e9a6"
+  },
+  "fingerprint": "a0bdb5696b741ea8c2f476289484e5f7ff2df6ccd38d231975a2f53c95c0d84f",
+  "selection": {
+    "source": {
+      "dataset": "CESNET-TimeSeries26",
+      "url": "https://drive.usercontent.google.com/download?id=18zB39Ya_i1z7ZJehD9LLiXPIyyotneri&export=download&confirm=t",
+      "sha256": "57430eb3ea714cbeceb9b4c026010aa158b79432b7e1af291fc1cf1eebd7d49e",
+      "bytes": 531400262,
+      "checksum_source": "https://raw.githubusercontent.com/CESNET/cesnet-tszoo/main/cesnet_tszoo/datasets/databases/cesnet_timeseries26/constants.py",
+      "record": "https://zenodo.org/records/23283552",
+      "citation": "https://doi.org/10.5281/zenodo.21945629",
+      "license": "CC-BY-4.0",
+      "download": "4 parallel byte ranges, 1 MiB streaming buffers"
+    },
+    "seed": 20261107,
+    "selected_ids": [
+      "4",
+      "14",
+      "24",
+      "37",
+      "38",
+      "41",
+      "52",
+      "55",
+      "76",
+      "107",
+      "134",
+      "144",
+      "173",
+      "178",
+      "179",
+      "186",
+      "204",
+      "215",
+      "222",
+      "242",
+      "248",
+      "251",
+      "254",
+      "258"
+    ],
+    "eligible_count": 274,
+    "start": "2025-09-15 00:00:00+00:00",
+    "calibration_start": "2025-12-08 00:00:00+00:00",
+    "selection_start": "2025-12-22 00:00:00+00:00",
+    "test_start": "2026-01-05 00:00:00+00:00",
+    "end_exclusive": "2026-03-02 00:00:00+00:00",
+    "hours": 4032,
+    "training_hours": 2016,
+    "exclusion_intervals": [
+      {
+        "reason": "monitoring outage including boundary hours",
+        "start": "2025-10-05 09:00:00+00:00",
+        "stop": "2025-10-05 12:00:00+00:00"
+      },
+      {
+        "reason": "monitoring outage including boundary hours",
+        "start": "2025-10-05 12:00:00+00:00",
+        "stop": "2025-10-06 04:00:00+00:00"
+      },
+      {
+        "reason": "monitoring outage including boundary hours",
+        "start": "2025-10-07 06:00:00+00:00",
+        "stop": "2025-10-07 09:00:00+00:00"
+      },
+      {
+        "reason": "DST local calendar day, conservative exclusion",
+        "start": "2025-10-25 22:00:00+00:00",
+        "stop": "2025-10-26 23:00:00+00:00"
+      }
+    ],
+    "excluded_common_hours": 47,
+    "complete_days": {
+      "4": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "14": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "24": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "37": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "38": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "41": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "52": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "55": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "76": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "107": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "134": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "144": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "173": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "178": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "179": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "186": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "204": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "215": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "222": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "242": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "248": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "251": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "254": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      },
+      "258": {
+        "calibration": 14,
+        "selection": 14,
+        "test": 56
+      }
+    },
+    "training_coverage": {
+      "4": 0.9766865079365079,
+      "14": 0.9766865079365079,
+      "24": 0.9766865079365079,
+      "37": 0.9766865079365079,
+      "38": 0.9766865079365079,
+      "41": 0.9766865079365079,
+      "52": 0.9766865079365079,
+      "55": 0.9766865079365079,
+      "76": 0.9756944444444444,
+      "107": 0.9766865079365079,
+      "134": 0.9766865079365079,
+      "144": 0.9766865079365079,
+      "173": 0.9766865079365079,
+      "178": 0.9766865079365079,
+      "179": 0.9766865079365079,
+      "186": 0.9766865079365079,
+      "204": 0.9766865079365079,
+      "215": 0.9766865079365079,
+      "222": 0.9766865079365079,
+      "242": 0.9766865079365079,
+      "248": 0.9766865079365079,
+      "251": 0.9766865079365079,
+      "254": 0.9766865079365079,
+      "258": 0.9766865079365079
+    },
+    "values_sha256": "92019b6b0b6e34e49bcc72fbb2672d00310162fdc436deea2af7bf2097398bb4"
+  },
+  "models": [
+    "last",
+    "daily",
+    "weekly",
+    "weekly_mean",
+    "ets",
+    "mstl",
+    "ridge",
+    "5M",
+    "28M"
+  ],
+  "revisions": {
+    "5M": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+    "28M": "49b26409ac87b5935539a5d8ffe7f397b720db47"
+  },
+  "seed": 20261107,
+  "calibration_start": "2025-12-08 00:00:00+00:00",
+  "test_start": "2026-01-05 00:00:00+00:00",
+  "end_exclusive": "2026-03-02 00:00:00+00:00"
+}

@@ -92,7 +92,18 @@ BASE_URL=http://127.0.0.1:8504 npx playwright test
 
 Risultati effettivi della sessione: [RESEARCH.md](docs/RESEARCH.md).
 
-Su dodici istituzioni CESNET: MAE 28M **−20,79% rispetto a ETS**, ma il piano
+La [seconda ricerca](docs/RESEARCH_V2.md) prosegue l'indagine: diagnosi dei
+picchi della V1, margini adattivi e protezione reattiva causale, poi confronto
+su un nuovo periodo CESNET del 2026. Il [protocollo V2](docs/PROTOCOL_V2.md)
+include anche controlli senza AI e conserva la politica originale come
+confronto sugli stessi dati nuovi. Non richiede l'avvio della dashboard.
+Esperimento concluso: 24 istituzioni, 56 giorni finali, **MAE 28M −35,80%**
+rispetto a ETS, ma **capacità +1,20% e deficit 1,540% contro 1,496%**.
+Il criterio operativo resta fallito. Suite Python ampliata a **28 test passati**;
+diagnosi, confronti delle politiche e misure di tempo/RAM sono nel report V2.
+I replay dell'interfaccia rimangono quelli della prima ricerca.
+
+Prima ricerca, su dodici istituzioni CESNET: MAE 28M **−20,79% rispetto a ETS**, ma il piano
 non supera il criterio operativo (capacità −6,30%, deficit 2,060% contro
 soglia 1%). 19 test Python, tre test Chromium e due inferenze API reali passati.
 

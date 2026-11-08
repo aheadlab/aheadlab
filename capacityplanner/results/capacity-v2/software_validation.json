@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-08",
+  "python_tests_passed": 28,
+  "new_policy_tests": 9,
+  "pytest_summary": "............................                                             [100%]\n28 passed in 3.21s",
+  "frozen_hashes_match": true,
+  "frozen_hashes": {
+    "docs/PROTOCOL_V2.md": "7ec9d0cbbd66bdfec67269fcf1250d787f4a4743c557ba4279e2e65635374227",
+    "src/capacityplanner/core.py": "5ac13f2dd11d6d159d6ba2b4d56a23434805b3abfd1775e1825ce011d38b6802",
+    "src/capacityplanner/policy_v2.py": "885761ab8e12085fcfe5bc2ae303318c581f2bfc63c92e62b0e85122f89c8a8d",
+    "scripts/research_v2.py": "6f79a7a6648bb8a48c58806794e726f7df43c182f816ac0d0285c43c0246e9a6"
+  },
+  "numerical_checks": {
+    "institution_sums_match": true,
+    "paired_arrays_match": true,
+    "primary_selection_unchanged": true,
+    "policies": 241,
+    "complete_pairs": 1344
+  },
+  "documentation_links_valid": true,
+  "existing_services_unchanged": 8,
+  "min_host_available_gib": 8.391048431396484,
+  "frontend_changed": false,
+  "browser_tests_rerun": false
+}

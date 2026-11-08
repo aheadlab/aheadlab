@@ -10,3 +10,4 @@ results/*/services*.json
 results/*/*.log
 results/*/*.command.json
 results/*/memory_*.json
+results/*/diagnosis_hourly.csv

@@ -1,0 +1,683 @@
+{
+  "status": "complete",
+  "primary": {
+    "ai": {
+      "key": 229,
+      "model": "28M",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 1679669.0,
+      "deficit_fraction": 0.015401084901509881,
+      "raw_deficit_fraction": 0.006733421621618421,
+      "institutions_over_one_percent": 9,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.11431901361893293,
+      "pairs": 1344
+    },
+    "classic": {
+      "key": 125,
+      "model": "ets",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 1659699.0,
+      "deficit_fraction": 0.014962575187615441,
+      "raw_deficit_fraction": 0.006509409720312752,
+      "institutions_over_one_percent": 10,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.11552248775814004,
+      "pairs": 1344
+    },
+    "saving_pct": -1.2032302242755977,
+    "saving_ci": [
+      -5.435620435262422,
+      2.463866324270767
+    ],
+    "deficit_delta_ci": [
+      -0.0003188268098213671,
+      0.0020601231170873807
+    ],
+    "passed": false
+  },
+  "models": [
+    {
+      "key": 7,
+      "model": "last",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "selection_feasible": true,
+      "unit_hours": 2061411.0,
+      "deficit_fraction": 0.012973187908848171,
+      "raw_deficit_fraction": 0.007804912778897923,
+      "institutions_over_one_percent": 6,
+      "institutions_over_five_percent": 2,
+      "worst_institution_deficit": 0.10917588781098753,
+      "pairs": 1344
+    },
+    {
+      "key": 21,
+      "model": "last",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 1750497.0,
+      "deficit_fraction": 0.015276116391861737,
+      "raw_deficit_fraction": 0.006419490184903518,
+      "institutions_over_one_percent": 10,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.11492161724879843,
+      "pairs": 1344
+    },
+    {
+      "key": 33,
+      "model": "daily",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "selection_feasible": true,
+      "unit_hours": 2061568.0,
+      "deficit_fraction": 0.012638789844432516,
+      "raw_deficit_fraction": 0.0063913885438254235,
+      "institutions_over_one_percent": 8,
+      "institutions_over_five_percent": 2,
+      "worst_institution_deficit": 0.10780722605125667,
+      "pairs": 1344
+    },
+    {
+      "key": 47,
+      "model": "daily",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 1748873.0,
+      "deficit_fraction": 0.015523625818219797,
+      "raw_deficit_fraction": 0.0067253777152479835,
+      "institutions_over_one_percent": 10,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.11344488958379993,
+      "pairs": 1344
+    },
+    {
+      "key": 59,
+      "model": "weekly",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "selection_feasible": true,
+      "unit_hours": 1977500.0,
+      "deficit_fraction": 0.022804307755292942,
+      "raw_deficit_fraction": 0.010651156941199513,
+      "institutions_over_one_percent": 11,
+      "institutions_over_five_percent": 3,
+      "worst_institution_deficit": 0.10552612311837191,
+      "pairs": 1344
+    },
+    {
+      "key": 73,
+      "model": "weekly",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 1723411.0,
+      "deficit_fraction": 0.015280903095460298,
+      "raw_deficit_fraction": 0.006480551345565326,
+      "institutions_over_one_percent": 11,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.11334945073052294,
+      "pairs": 1344
+    },
+    {
+      "key": 85,
+      "model": "weekly_mean",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "selection_feasible": true,
+      "unit_hours": 1862105.0,
+      "deficit_fraction": 0.020793866414609632,
+      "raw_deficit_fraction": 0.007856110219629116,
+      "institutions_over_one_percent": 11,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.10598234370494886,
+      "pairs": 1344
+    },
+    {
+      "key": 101,
+      "model": "weekly_mean",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.5,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 2382254.0,
+      "deficit_fraction": 0.009114454953359078,
+      "raw_deficit_fraction": 0.002905990219142153,
+      "institutions_over_one_percent": 8,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.10735191784731715,
+      "pairs": 1344
+    },
+    {
+      "key": 111,
+      "model": "ets",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "selection_feasible": true,
+      "unit_hours": 1969567.0,
+      "deficit_fraction": 0.012608050911599921,
+      "raw_deficit_fraction": 0.00625508889062667,
+      "institutions_over_one_percent": 9,
+      "institutions_over_five_percent": 2,
+      "worst_institution_deficit": 0.10826344663783362,
+      "pairs": 1344
+    },
+    {
+      "key": 125,
+      "model": "ets",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 1659699.0,
+      "deficit_fraction": 0.014962575187615441,
+      "raw_deficit_fraction": 0.006509409720312752,
+      "institutions_over_one_percent": 10,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.11552248775814004,
+      "pairs": 1344
+    },
+    {
+      "key": 137,
+      "model": "mstl",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "selection_feasible": true,
+      "unit_hours": 1910295.0,
+      "deficit_fraction": 0.01245005420059802,
+      "raw_deficit_fraction": 0.006648612767817735,
+      "institutions_over_one_percent": 10,
+      "institutions_over_five_percent": 2,
+      "worst_institution_deficit": 0.10735100546467972,
+      "pairs": 1344
+    },
+    {
+      "key": 153,
+      "model": "mstl",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.5,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 2374040.0,
+      "deficit_fraction": 0.009155190495677095,
+      "raw_deficit_fraction": 0.002649255538923646,
+      "institutions_over_one_percent": 7,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.10552703550100935,
+      "pairs": 1344
+    },
+    {
+      "key": 163,
+      "model": "ridge",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "selection_feasible": true,
+      "unit_hours": 1968731.0,
+      "deficit_fraction": 0.01401698941376417,
+      "raw_deficit_fraction": 0.00792167155135961,
+      "institutions_over_one_percent": 9,
+      "institutions_over_five_percent": 2,
+      "worst_institution_deficit": 0.10666667458481428,
+      "pairs": 1344
+    },
+    {
+      "key": 177,
+      "model": "ridge",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 1680502.0,
+      "deficit_fraction": 0.015314368097669555,
+      "raw_deficit_fraction": 0.006718010403506632,
+      "institutions_over_one_percent": 10,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.11364467645203905,
+      "pairs": 1344
+    },
+    {
+      "key": 189,
+      "model": "5M",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "selection_feasible": true,
+      "unit_hours": 1991169.0,
+      "deficit_fraction": 0.013245571160160924,
+      "raw_deficit_fraction": 0.007435200832718757,
+      "institutions_over_one_percent": 9,
+      "institutions_over_five_percent": 3,
+      "worst_institution_deficit": 0.10871966722441058,
+      "pairs": 1344
+    },
+    {
+      "key": 203,
+      "model": "5M",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 1685864.0,
+      "deficit_fraction": 0.015459012577413112,
+      "raw_deficit_fraction": 0.006695834261573871,
+      "institutions_over_one_percent": 9,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.11477523420550988,
+      "pairs": 1344
+    },
+    {
+      "key": 215,
+      "model": "28M",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "selection_feasible": true,
+      "unit_hours": 1991840.0,
+      "deficit_fraction": 0.013046396446459557,
+      "raw_deficit_fraction": 0.007339702655549489,
+      "institutions_over_one_percent": 9,
+      "institutions_over_five_percent": 3,
+      "worst_institution_deficit": 0.10871966722441058,
+      "pairs": 1344
+    },
+    {
+      "key": 229,
+      "model": "28M",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "selection_feasible": true,
+      "unit_hours": 1679669.0,
+      "deficit_fraction": 0.015401084901509881,
+      "raw_deficit_fraction": 0.006733421621618421,
+      "institutions_over_one_percent": 9,
+      "institutions_over_five_percent": 1,
+      "worst_institution_deficit": 0.11431901361893293,
+      "pairs": 1344
+    },
+    {
+      "key": 237,
+      "model": "reactive_only",
+      "family": "reactive",
+      "q": 0.0,
+      "multiplier": 2.0,
+      "reactive": 2.0,
+      "selection_feasible": false,
+      "unit_hours": 610191.0,
+      "deficit_fraction": 0.10796099256292757,
+      "raw_deficit_fraction": 0.06859200581783653,
+      "institutions_over_one_percent": 23,
+      "institutions_over_five_percent": 19,
+      "worst_institution_deficit": 0.5036465302281105,
+      "pairs": 1344
+    },
+    {
+      "key": 240,
+      "model": "fixed_p99",
+      "family": "fixed",
+      "q": 0.0,
+      "multiplier": 2.0,
+      "reactive": 0.0,
+      "selection_feasible": false,
+      "unit_hours": 1436736.0,
+      "deficit_fraction": 0.08190818210072329,
+      "raw_deficit_fraction": 0.0048267813840697695,
+      "institutions_over_one_percent": 10,
+      "institutions_over_five_percent": 4,
+      "worst_institution_deficit": 0.2942717149860263,
+      "pairs": 1344
+    }
+  ],
+  "protocol": {
+    "created_utc": "2026-11-07 16:18:58.781491+00:00",
+    "hashes": {
+      "docs/PROTOCOL_V2.md": "7ec9d0cbbd66bdfec67269fcf1250d787f4a4743c557ba4279e2e65635374227",
+      "src/capacityplanner/core.py": "5ac13f2dd11d6d159d6ba2b4d56a23434805b3abfd1775e1825ce011d38b6802",
+      "src/capacityplanner/policy_v2.py": "885761ab8e12085fcfe5bc2ae303318c581f2bfc63c92e62b0e85122f89c8a8d",
+      "scripts/research_v2.py": "6f79a7a6648bb8a48c58806794e726f7df43c182f816ac0d0285c43c0246e9a6"
+    },
+    "fingerprint": "a0bdb5696b741ea8c2f476289484e5f7ff2df6ccd38d231975a2f53c95c0d84f",
+    "selection": {
+      "source": {
+        "dataset": "CESNET-TimeSeries26",
+        "url": "https://drive.usercontent.google.com/download?id=18zB39Ya_i1z7ZJehD9LLiXPIyyotneri&export=download&confirm=t",
+        "sha256": "57430eb3ea714cbeceb9b4c026010aa158b79432b7e1af291fc1cf1eebd7d49e",
+        "bytes": 531400262,
+        "checksum_source": "https://raw.githubusercontent.com/CESNET/cesnet-tszoo/main/cesnet_tszoo/datasets/databases/cesnet_timeseries26/constants.py",
+        "record": "https://zenodo.org/records/23283552",
+        "citation": "https://doi.org/10.5281/zenodo.21945629",
+        "license": "CC-BY-4.0",
+        "download": "4 parallel byte ranges, 1 MiB streaming buffers"
+      },
+      "seed": 20261107,
+      "selected_ids": [
+        "4",
+        "14",
+        "24",
+        "37",
+        "38",
+        "41",
+        "52",
+        "55",
+        "76",
+        "107",
+        "134",
+        "144",
+        "173",
+        "178",
+        "179",
+        "186",
+        "204",
+        "215",
+        "222",
+        "242",
+        "248",
+        "251",
+        "254",
+        "258"
+      ],
+      "eligible_count": 274,
+      "start": "2025-09-15 00:00:00+00:00",
+      "calibration_start": "2025-12-08 00:00:00+00:00",
+      "selection_start": "2025-12-22 00:00:00+00:00",
+      "test_start": "2026-01-05 00:00:00+00:00",
+      "end_exclusive": "2026-03-02 00:00:00+00:00",
+      "hours": 4032,
+      "training_hours": 2016,
+      "exclusion_intervals": [
+        {
+          "reason": "monitoring outage including boundary hours",
+          "start": "2025-10-05 09:00:00+00:00",
+          "stop": "2025-10-05 12:00:00+00:00"
+        },
+        {
+          "reason": "monitoring outage including boundary hours",
+          "start": "2025-10-05 12:00:00+00:00",
+          "stop": "2025-10-06 04:00:00+00:00"
+        },
+        {
+          "reason": "monitoring outage including boundary hours",
+          "start": "2025-10-07 06:00:00+00:00",
+          "stop": "2025-10-07 09:00:00+00:00"
+        },
+        {
+          "reason": "DST local calendar day, conservative exclusion",
+          "start": "2025-10-25 22:00:00+00:00",
+          "stop": "2025-10-26 23:00:00+00:00"
+        }
+      ],
+      "excluded_common_hours": 47,
+      "complete_days": {
+        "4": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "14": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "24": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "37": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "38": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "41": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "52": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "55": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "76": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "107": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "134": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "144": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "173": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "178": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "179": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "186": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "204": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "215": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "222": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "242": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "248": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "251": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "254": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        },
+        "258": {
+          "calibration": 14,
+          "selection": 14,
+          "test": 56
+        }
+      },
+      "training_coverage": {
+        "4": 0.9766865079365079,
+        "14": 0.9766865079365079,
+        "24": 0.9766865079365079,
+        "37": 0.9766865079365079,
+        "38": 0.9766865079365079,
+        "41": 0.9766865079365079,
+        "52": 0.9766865079365079,
+        "55": 0.9766865079365079,
+        "76": 0.9756944444444444,
+        "107": 0.9766865079365079,
+        "134": 0.9766865079365079,
+        "144": 0.9766865079365079,
+        "173": 0.9766865079365079,
+        "178": 0.9766865079365079,
+        "179": 0.9766865079365079,
+        "186": 0.9766865079365079,
+        "204": 0.9766865079365079,
+        "215": 0.9766865079365079,
+        "222": 0.9766865079365079,
+        "242": 0.9766865079365079,
+        "248": 0.9766865079365079,
+        "251": 0.9766865079365079,
+        "254": 0.9766865079365079,
+        "258": 0.9766865079365079
+      },
+      "values_sha256": "92019b6b0b6e34e49bcc72fbb2672d00310162fdc436deea2af7bf2097398bb4"
+    },
+    "models": [
+      "last",
+      "daily",
+      "weekly",
+      "weekly_mean",
+      "ets",
+      "mstl",
+      "ridge",
+      "5M",
+      "28M"
+    ],
+    "revisions": {
+      "5M": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+      "28M": "49b26409ac87b5935539a5d8ffe7f397b720db47"
+    },
+    "seed": 20261107,
+    "calibration_start": "2025-12-08 00:00:00+00:00",
+    "test_start": "2026-01-05 00:00:00+00:00",
+    "end_exclusive": "2026-03-02 00:00:00+00:00"
+  },
+  "total_policies": 241,
+  "units": {
+    "4": 0.16016400506666656,
+    "14": 0.3137309208888883,
+    "24": 0.2946340769333333,
+    "37": 7.406533333333333e-06,
+    "38": 0.750635766933333,
+    "41": 0.4464530458666666,
+    "52": 2.862625090622222,
+    "55": 3.0696352127111104,
+    "76": 0.007817784866666667,
+    "107": 0.4396139077333333,
+    "134": 0.29643027946666667,
+    "144": 0.11933098755555552,
+    "173": 1.0093167811555546,
+    "178": 0.8131039356444433,
+    "179": 0.557744294533333,
+    "186": 0.30231419622222216,
+    "204": 0.07780128328888883,
+    "215": 0.17255935035555553,
+    "222": 0.5975277687111109,
+    "242": 0.0328944704444443,
+    "248": 0.10689844928888885,
+    "251": 0.06718710742222216,
+    "254": 0.11813249524444444,
+    "258": 0.29716474142222216
+  },
+  "forecast_metrics": {
+    "28M": {
+      "mae": 0.8033531194390646,
+      "mase": 0.7464326487874163
+    },
+    "5M": {
+      "mae": 0.829729830725518,
+      "mase": 0.7693760067651993
+    },
+    "daily": {
+      "mae": 1.3742391007796655,
+      "mase": 1.2363450966686567
+    },
+    "ets": {
+      "mae": 1.2513201247569836,
+      "mase": 1.152937666934903
+    },
+    "last": {
+      "mae": 1.8026510118628747,
+      "mase": 1.453145437860225
+    },
+    "mstl": {
+      "mae": 1.0584715367061663,
+      "mase": 1.025897641413858
+    },
+    "ridge": {
+      "mae": 1.0202466435739845,
+      "mase": 0.9808766514741162
+    },
+    "weekly": {
+      "mae": 1.2827366725243883,
+      "mase": 1.1982198045859824
+    },
+    "weekly_mean": {
+      "mae": 1.1255707228914344,
+      "mase": 1.0559924979527835
+    }
+  }
+}

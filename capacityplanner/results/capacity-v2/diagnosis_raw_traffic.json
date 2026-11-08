@@ -1,0 +1,14 @@
+{
+  "28M": {
+    "raw_deficit_fraction": 0.0022250021455659567,
+    "institution_242_raw_deficit_share": 0.09501869559628118
+  },
+  "ets": {
+    "raw_deficit_fraction": 0.001960031443915199,
+    "institution_242_raw_deficit_share": 0.0949649801669804
+  },
+  "weekly_mean": {
+    "raw_deficit_fraction": 0.003053455346854844,
+    "institution_242_raw_deficit_share": 0.0395212404069152
+  }
+}

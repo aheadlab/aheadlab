@@ -32,9 +32,12 @@ def services():
 
 
 def main():
+    global OUT
     parser = argparse.ArgumentParser()
+    parser.add_argument('--study', choices=['cesnet','capacity-v2'], default='cesnet')
     parser.add_argument('phases', nargs='+')
     args = parser.parse_args()
+    OUT = ROOT/'capacityplanner/results'/args.study
     OUT.mkdir(parents=True, exist_ok=True)
     run_id = uuid.uuid4().hex[:8]
     before = services()
@@ -42,13 +45,14 @@ def main():
     monitoring = []
     try:
         for phase in args.phases:
-            if phase not in ['inspect','prepare','benchmark','test','analyze','environment']:
+            if phase not in ['inspect','prepare','benchmark','test','analyze','environment',
+                             'v2-diagnose','v2-inspect','v2-prepare','v2-forecast','v2-evaluate','v2-report','v2-runtime']:
                 raise ValueError(phase)
             if free_ram() < 5*1024**3:
                 raise RuntimeError('Less than 5 GiB host RAM free; job not started')
             project = 'capacityplanner'
             name = f'aheadlab-capacity-check-{run_id}-{phase}'
-            command = ['docker','run','--rm','--name',name,'--network','none','--cpus','1',
+            command = ['docker','run','--rm','--name',name,'--no-healthcheck','--network','none','--cpus','1',
                 '--memory','2g','--memory-swap','2g','--pids-limit','256',
                 '--mount',f'type=bind,source={ROOT},target=/workspace,readonly',
                 '--mount',f'type=bind,source={OUT},target=/out',
@@ -61,6 +65,12 @@ def main():
                 '-w',f'/workspace/{project}','aheadlab-capacity-validation']
             if phase == 'test':
                 command += ['pytest','-q','-p','no:cacheprovider','--basetemp=/tmp/tests']
+            elif phase=='v2-report':
+                command += ['python',f'/workspace/{project}/scripts/report_v2.py']
+            elif phase=='v2-runtime':
+                command += ['python',f'/workspace/{project}/scripts/benchmark_runtime_v2.py']
+            elif phase.startswith('v2-'):
+                command += ['python',f'/workspace/{project}/scripts/research_v2.py',phase[3:]]
             else:
                 command += ['python',f'/workspace/{project}/scripts/research.py',phase]
             print(f'Start {phase}; host free {free_ram()/1024**3:.2f} GiB', flush=True)

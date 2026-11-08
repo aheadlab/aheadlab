@@ -1,0 +1,7 @@
+# Preserve the bytes of the frozen research sources on Windows checkouts.
+docs/PROTOCOL.md text eol=lf
+docs/PROTOCOL_V2.md text eol=lf
+src/capacityplanner/core.py text eol=lf
+src/capacityplanner/benchmark.py text eol=lf
+src/capacityplanner/policy_v2.py text eol=lf
+scripts/research_v2.py text eol=lf

@@ -1,0 +1,15 @@
+{
+  "phases": [
+    "v2-prepare",
+    "v2-forecast"
+  ],
+  "services_unchanged": true,
+  "existing_services": 8,
+  "min_host_available_gib": 8.391048431396484,
+  "limits": {
+    "memory_gib": 2,
+    "cpu": 1,
+    "network": "none",
+    "extra_swap": 0
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "primary_ai": {
+    "key": 229,
+    "model": "28M",
+    "family": "adaptive",
+    "q": 1.0,
+    "multiplier": 1.0,
+    "reactive": 1.25,
+    "unit_hours": 379864.0,
+    "deficit_fraction": 0.009093664743099488
+  },
+  "primary_classic": {
+    "key": 125,
+    "model": "ets",
+    "family": "adaptive",
+    "q": 1.0,
+    "multiplier": 1.0,
+    "reactive": 1.25,
+    "unit_hours": 371062.0,
+    "deficit_fraction": 0.008742426765383783
+  },
+  "model_families": [
+    {
+      "key": 7,
+      "model": "last",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "unit_hours": 504464.0,
+      "deficit_fraction": 0.005041610774000064
+    },
+    {
+      "key": 21,
+      "model": "last",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "unit_hours": 400094.0,
+      "deficit_fraction": 0.008955443317113777
+    },
+    {
+      "key": 33,
+      "model": "daily",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "unit_hours": 494162.0,
+      "deficit_fraction": 0.005563319002137528
+    },
+    {
+      "key": 47,
+      "model": "daily",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "unit_hours": 382666.0,
+      "deficit_fraction": 0.008531694701950848
+    },
+    {
+      "key": 59,
+      "model": "weekly",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "unit_hours": 481368.0,
+      "deficit_fraction": 0.0029163572730761997
+    },
+    {
+      "key": 73,
+      "model": "weekly",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "unit_hours": 380257.0,
+      "deficit_fraction": 0.007625608820338586
+    },
+    {
+      "key": 85,
+      "model": "weekly_mean",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "unit_hours": 459568.0,
+      "deficit_fraction": 0.007153603673240594
+    },
+    {
+      "key": 101,
+      "model": "weekly_mean",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.5,
+      "reactive": 1.25,
+      "unit_hours": 529131.0,
+      "deficit_fraction": 0.004707989558207682
+    },
+    {
+      "key": 111,
+      "model": "ets",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "unit_hours": 473237.0,
+      "deficit_fraction": 0.005695871835201339
+    },
+    {
+      "key": 125,
+      "model": "ets",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "unit_hours": 371062.0,
+      "deficit_fraction": 0.008742426765383783
+    },
+    {
+      "key": 137,
+      "model": "mstl",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "unit_hours": 459122.0,
+      "deficit_fraction": 0.0073209174055884965
+    },
+    {
+      "key": 153,
+      "model": "mstl",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.5,
+      "reactive": 1.25,
+      "unit_hours": 536313.0,
+      "deficit_fraction": 0.004269631319863195
+    },
+    {
+      "key": 163,
+      "model": "ridge",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "unit_hours": 480370.0,
+      "deficit_fraction": 0.005369804192615425
+    },
+    {
+      "key": 177,
+      "model": "ridge",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "unit_hours": 378998.0,
+      "deficit_fraction": 0.008663717657856238
+    },
+    {
+      "key": 189,
+      "model": "5M",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "unit_hours": 481567.0,
+      "deficit_fraction": 0.005891512420752889
+    },
+    {
+      "key": 203,
+      "model": "5M",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "unit_hours": 379944.0,
+      "deficit_fraction": 0.009207461400940697
+    },
+    {
+      "key": 215,
+      "model": "28M",
+      "family": "original",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 0.0,
+      "unit_hours": 481324.0,
+      "deficit_fraction": 0.006079713768383702
+    },
+    {
+      "key": 229,
+      "model": "28M",
+      "family": "adaptive",
+      "q": 1.0,
+      "multiplier": 1.0,
+      "reactive": 1.25,
+      "unit_hours": 379864.0,
+      "deficit_fraction": 0.009093664743099488
+    },
+    {
+      "key": 237,
+      "model": "reactive_only",
+      "family": "reactive",
+      "q": 0.0,
+      "multiplier": 2.0,
+      "reactive": 2.0,
+      "unit_hours": 76518.0,
+      "deficit_fraction": 0.1227493158541832
+    },
+    {
+      "key": 240,
+      "model": "fixed_p99",
+      "family": "fixed",
+      "q": 0.0,
+      "multiplier": 2.0,
+      "reactive": 0.0,
+      "unit_hours": 358183.0,
+      "deficit_fraction": 0.03784468246673202
+    }
+  ]
+}

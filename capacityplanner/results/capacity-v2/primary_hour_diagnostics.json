@@ -1,0 +1,18 @@
+{
+  "28M": {
+    "hours": 32256,
+    "hours_under": 126,
+    "fraction_hours_under": 0.00390625,
+    "margin_coverage": 0.9934585813492064,
+    "largest_hour_normalized_deficit": 314.0251433001116,
+    "top_one_percent_hours_deficit_share": 1.0
+  },
+  "ets": {
+    "hours": 32256,
+    "hours_under": 122,
+    "fraction_hours_under": 0.0037822420634920635,
+    "margin_coverage": 0.9938306051587301,
+    "largest_hour_normalized_deficit": 316.0251433001116,
+    "top_one_percent_hours_deficit_share": 1.0
+  }
+}

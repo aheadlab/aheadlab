@@ -11,9 +11,15 @@ Quattro applicazioni di previsione su CPU. Le prime tre derivano da [`PROGETTI.m
 
 Capacity Planner si avvia separatamente con `docker compose -f capacityplanner/compose.yaml up -d --build --wait`.
 Il Compose principale continua a gestire solo i tre progetti originali.
-La [nuova ricerca](capacityplanner/docs/RESEARCH.md) misura un MAE del 28M inferiore
+La [prima ricerca](capacityplanner/docs/RESEARCH.md) misura un MAE del 28M inferiore
 del 20,79% a ETS su CESNET, ma non conferma il criterio di risparmio operativo.
 La [scheda portfolio](PORTFOLIO_RICERCA.md) raccoglie risultati e limiti dei quattro casi.
+La [ricerca successiva](capacityplanner/docs/RESEARCH_V2.md) approfondisce i picchi,
+confronta politiche adattive e controlli senza AI e usa un nuovo test CESNET 2026.
+Su 24 istituzioni e otto settimane conferma il vantaggio previsionale
+(MAE 28M −35,80% rispetto a ETS), ma non quello operativo: capacità +1,20%
+e deficit 1,540% contro 1,496%. Risultati, diagnosi e misure RAM/latenza sono
+completi; i frontend conservano le demo e i replay esistenti.
 
 ## Documentazione per sottoprogetto
 

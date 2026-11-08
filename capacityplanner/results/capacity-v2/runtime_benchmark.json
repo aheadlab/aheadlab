@@ -1,0 +1,82 @@
+{
+  "description": "Ancillary measurement after method/protocol freeze; not used in selection",
+  "limit": "one CPU, 2 GiB, one child at a time, local weights and no network",
+  "history": "institution 4, 2016 hours before 2025-12-08",
+  "horizon": 24,
+  "repetitions": 10,
+  "notes": "RSS includes Python and libraries. First forecast includes lazy imports and weight loading; warm calls repeat the same history. Machine-specific, not energy or monetary cost.",
+  "rows": [
+    {
+      "model": "last",
+      "first_forecast_seconds": 0.0017695608548820019,
+      "warm_median_seconds": 0.0014261840842664242,
+      "warm_min_seconds": 0.0013722525909543037,
+      "warm_max_seconds": 0.0019251075573265553,
+      "peak_process_rss_mib": 126.265625
+    },
+    {
+      "model": "daily",
+      "first_forecast_seconds": 0.0015822122804820538,
+      "warm_median_seconds": 0.0014535537920892239,
+      "warm_min_seconds": 0.0014154883101582527,
+      "warm_max_seconds": 0.0015754345804452896,
+      "peak_process_rss_mib": 126.18359375
+    },
+    {
+      "model": "weekly",
+      "first_forecast_seconds": 0.0032173371873795986,
+      "warm_median_seconds": 0.0015314503107219934,
+      "warm_min_seconds": 0.0014422242529690266,
+      "warm_max_seconds": 0.0022442862391471863,
+      "peak_process_rss_mib": 125.89453125
+    },
+    {
+      "model": "weekly_mean",
+      "first_forecast_seconds": 0.0016698730178177357,
+      "warm_median_seconds": 0.001507055014371872,
+      "warm_min_seconds": 0.0014512836933135986,
+      "warm_max_seconds": 0.001652801875025034,
+      "peak_process_rss_mib": 125.5625
+    },
+    {
+      "model": "ets",
+      "first_forecast_seconds": 2.29691759403795,
+      "warm_median_seconds": 0.20911119505763054,
+      "warm_min_seconds": 0.20339718833565712,
+      "warm_max_seconds": 0.23622949374839664,
+      "peak_process_rss_mib": 233.515625
+    },
+    {
+      "model": "mstl",
+      "first_forecast_seconds": 1.6324242409318686,
+      "warm_median_seconds": 0.4362556536216289,
+      "warm_min_seconds": 0.42788472631946206,
+      "warm_max_seconds": 0.502234669867903,
+      "peak_process_rss_mib": 232.8671875
+    },
+    {
+      "model": "ridge",
+      "first_forecast_seconds": 0.005943202879279852,
+      "warm_median_seconds": 0.004685058258473873,
+      "warm_min_seconds": 0.0044848243705928326,
+      "warm_max_seconds": 0.004989001899957657,
+      "peak_process_rss_mib": 127.70703125
+    },
+    {
+      "model": "5M",
+      "first_forecast_seconds": 2.523315589874983,
+      "warm_median_seconds": 0.029001920484006405,
+      "warm_min_seconds": 0.02767087798565626,
+      "warm_max_seconds": 0.030562379863113165,
+      "peak_process_rss_mib": 372.203125
+    },
+    {
+      "model": "28M",
+      "first_forecast_seconds": 2.4559824001044035,
+      "warm_median_seconds": 0.11377359204925597,
+      "warm_min_seconds": 0.10853466903790832,
+      "warm_max_seconds": 0.1554869469255209,
+      "peak_process_rss_mib": 544.41796875
+    }
+  ]
+}

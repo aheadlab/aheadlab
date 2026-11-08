@@ -1,0 +1,11 @@
+{
+  "dataset": "CESNET-TimeSeries26",
+  "url": "https://drive.usercontent.google.com/download?id=18zB39Ya_i1z7ZJehD9LLiXPIyyotneri&export=download&confirm=t",
+  "sha256": "57430eb3ea714cbeceb9b4c026010aa158b79432b7e1af291fc1cf1eebd7d49e",
+  "bytes": 531400262,
+  "checksum_source": "https://raw.githubusercontent.com/CESNET/cesnet-tszoo/main/cesnet_tszoo/datasets/databases/cesnet_timeseries26/constants.py",
+  "record": "https://zenodo.org/records/23283552",
+  "citation": "https://doi.org/10.5281/zenodo.21945629",
+  "license": "CC-BY-4.0",
+  "download": "4 parallel byte ranges, 1 MiB streaming buffers"
+}

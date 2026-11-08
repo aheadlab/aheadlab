@@ -102,3 +102,32 @@ il consumo complessivo della macchina non era attribuibile a quel solo servizio.
 Gli altri otto container sono stati lasciati attivi. Dati e pesi restano su
 disco per un eventuale riavvio; non rimane un processo Timestral separato
 avviato da questo progetto.
+
+## Seconda ricerca Capacity Planner, conclusa l'8 novembre 2026
+
+Diagnosi dei picchi V1, margini aggiornati e protezione reattiva implementati
+in un modulo di ricerca separato. Protocollo e hash del codice fissati prima
+del test nuovo. Dati ufficiali CESNET-TimeSeries26 verificati con SHA-256;
+47 ore anomale dello storico mascherate; 24 istituzioni estratte sul training,
+56 giorni finali completi e 1.344 coppie istituzione/giorno.
+
+Completate 18.144 previsioni di 24 ore, 241 configurazioni di capacità e
+28 test Python (nove nuovi su causalità e simulazione). Verificati somme per
+istituzione, risultati accoppiati e conservazione delle scelte primarie.
+Analisi separate di componenti, dati grezzi/normalizzati e costi di esecuzione.
+Nessuna modifica dei frontend; test browser della prima fase non ripetuti.
+
+28M migliora il MAE del 35,80% rispetto a ETS, intervallo [30,04%; 41,44%].
+La politica adattiva non conferma il vantaggio operativo: capacità +1,20%,
+deficit 1,540% contro 1,496%, entrambi oltre soglia. La protezione reattiva
+riduce il deficit, ma l'aggiornamento del margine riduce eccessivamente la
+capacità. Risultati negativi conservati, nessuna scelta rifatta sul test.
+
+Job temporanei limitati a 2 GiB e una CPU, senza rete o swap aggiuntivo.
+Minimo RAM host disponibile campionato 8,39 GiB; otto servizi invariati.
+Dashboard e modelli del quarto progetto restano spenti dopo i calcoli.
+
+Prove e riproduzione: [ricerca V2](capacityplanner/docs/RESEARCH_V2.md),
+[protocollo](capacityplanner/docs/PROTOCOL_V2.md),
+[controlli numerici](capacityplanner/results/capacity-v2/checks.json),
+[piano completato](capacityplanner/docs/WORKPLAN_V2.md).

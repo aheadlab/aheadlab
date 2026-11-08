@@ -1,4 +1,10 @@
 """Explicit bounded streaming download of the official CC-BY-4.0 CESNET source."""
+import sys
+if '--ts26' in sys.argv:
+    from fetch_data26 import parallel_main
+    parallel_main()
+    sys.exit(0)
+
 import hashlib
 import json
 from pathlib import Path

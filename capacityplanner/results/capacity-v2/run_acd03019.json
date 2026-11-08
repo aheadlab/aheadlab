@@ -1,0 +1,17 @@
+{
+  "phases": [
+    "v2-evaluate",
+    "v2-report",
+    "v2-runtime",
+    "environment"
+  ],
+  "services_unchanged": true,
+  "existing_services": 8,
+  "min_host_available_gib": 8.797477722167969,
+  "limits": {
+    "memory_gib": 2,
+    "cpu": 1,
+    "network": "none",
+    "extra_swap": 0
+  }
+}

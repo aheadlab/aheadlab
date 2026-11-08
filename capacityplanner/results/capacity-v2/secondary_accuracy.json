@@ -1,0 +1,9 @@
+{
+  "label": "Secondary descriptive accuracy analysis, primary pair unchanged",
+  "mae_reduction_pct": 35.7995525249718,
+  "ci95": [
+    30.035605951954455,
+    41.44314606386072
+  ],
+  "institutions_with_lower_mae": 24
+}

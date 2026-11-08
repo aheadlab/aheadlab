@@ -2,6 +2,10 @@
 
 Esperimento eseguito il 6 novembre 2026; documentazione completata il 7 novembre.
 
+Questo è il primo esperimento. La [seconda ricerca](RESEARCH_V2.md) ne analizza
+il fallimento, introduce una politica adattiva e la verifica su un periodo
+nuovo del 2026. I numeri e il verdetto riportati qui restano quelli originali.
+
 **Timestral migliora la previsione del traffico nel campione reale esaminato.
 La politica di dimensionamento implementata non supera il criterio operativo.**
 Sono due risultati distinti, entrambi conservati nella dashboard.

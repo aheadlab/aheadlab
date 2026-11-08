@@ -1,6 +1,6 @@
 # Aheadlab — note e testo per la pagina portfolio
 
-Ricerca aggiornata al 7 novembre 2026. Questo documento prepara i contenuti della
+Ricerca aggiornata all'8 novembre 2026. Questo documento prepara i contenuti della
 pagina portfolio. I tre frontend originali restano intatti; Capacity Planner
 è il quarto progetto, con dashboard e benchmark propri.
 
@@ -53,9 +53,10 @@ serie. Il costo di configurazione e manutenzione è una dimensione utile da
 misurare, ma non è stato quantificato nei nostri esperimenti. Il supporto alla
 previsione zero-shot è descritto nel [repository ufficiale Timestral](https://github.com/mistralai/timestral/).
 
-**Sintesi editoriale:** abbiamo verificato vantaggi previsionali specifici;
-stiamo validando come trasformarli in decisioni migliori. Né «AI inutile» né
-«AI sempre migliore» descrivono i risultati.
+**Sintesi editoriale:** abbiamo verificato vantaggi previsionali specifici e
+testato anche una correzione del dimensionamento su dati nuovi. Il beneficio
+operativo non è confermato. Il risultato distingue la capacità utile del
+modello dall'efficacia della regola che prende decisioni usando le previsioni.
 
 ## Quattro schede di ricerca
 
@@ -141,6 +142,10 @@ Fonti: [regressioni](validation/results/solar_matched_summary.csv),
 [confronti per orizzonte](validation/results/solar_matched_paired.csv).
 
 ### Capacity Planner — dal traffico reale alla capacità
+
+Il caso comprende due fasi: il primo benchmark su CESNET 2024 e una ricerca
+successiva su CESNET 2026. Le due fasi sono separate per distinguere una
+diagnosi fatta su risultati già osservati dalla verifica di una nuova ipotesi.
 
 **Domanda:** prevedere meglio il traffico permette anche di predisporre meno
 risorse, mantenendo coperta la domanda?
@@ -293,14 +298,15 @@ Per un impiego reale ha senso affiancare il previsore al metodo corrente e
 misurarlo sul traffico del servizio. Per sostituire il dimensionamento
 occorrono throughput reale per risorsa, costi, tempi di attivazione, vincoli
 di servizio e un nuovo periodo di verifica. Margini adattivi e correzioni
-reattive sono possibili sviluppi: non sono risultati già ottenuti.
+reattive sono state implementate e verificate nella seconda ricerca descritta
+più sotto; i risultati di questa prima fase restano separati.
 
 I limiti rimangono dodici istituzioni, quattro settimane finali, medie orarie,
 possibile presenza dei dati nel pretraining e assenza di una prova live.
 L'evidenza privata di Coralogix che aveva motivato l'idea resta distinta dal
 nostro esperimento pubblico su CESNET: non ne abbiamo replicato il protocollo.
 
-**Testo breve pronto per la pagina:**
+**Testo breve relativo alla prima fase:**
 
 > Ho realizzato Capacity Planner per verificare se una previsione AI migliore
 > può aiutare a pianificare la capacità di rete. La dashboard confronta nove
@@ -321,6 +327,157 @@ Fonti e artefatti: [ricerca completa](capacityplanner/docs/RESEARCH.md),
 [analisi statistica secondaria](capacityplanner/results/cesnet/secondary_analysis.json),
 [grafico del confronto](capacityplanner/results/cesnet/comparison.svg).
 
+#### Seconda ricerca: capire il fallimento e verificare una correzione
+
+Mi sono chiesto perché una previsione più precisa non producesse il piano
+migliore. Ho ricostruito il primo esperimento ora per ora: **l'85,79% del
+deficit del 28M proveniva da una sola istituzione**, e meno dell'1% delle ore
+spiegava tutto il deficit. Lo stesso problema colpiva ETS. Il ritardo alla
+prima ora del piano non spiegava il risultato: erano pochi picchi a superare
+il margine fissato sulle due settimane di calibrazione.
+
+Ho verificato anche il significato dell'obiettivo. Quel deficit era
+normalizzato per la capacità del modulo di ogni istituzione. Contando il
+volume di traffico grezzo, il deficit del 28M è **0,2225%**, contro **0,1960%
+di ETS**; l'istituzione prima dominante pesa il 9,50% del deficit grezzo.
+Questa seconda misura non cancella il fallimento del criterio originale:
+mostra perché bisogna definire con precisione cosa conta per il servizio.
+Proteggere il volume complessivo della rete e assegnare un peso comparabile
+a istituzioni di scala diversa possono portare a decisioni differenti.
+
+La nuova politica aggiorna ogni giorno il margine con gli errori recenti e
+può aggiungere capacità quando il traffico già osservato cresce. Rispetta
+un'ora di attivazione: non può reagire a un picco conoscendolo in anticipo.
+I metodi classici ricevono le stesse possibilità. Il confronto include anche
+una regola soltanto reattiva e una capacità fissa prudenziale, per misurare
+il contributo aggiuntivo dell'AI rispetto a un buon controllo tradizionale.
+
+Per verificarla ho scelto un **periodo nuovo del dataset CESNET-TimeSeries26**:
+24 istituzioni estratte sullo storico iniziale, calibrazione e selezione
+separate, test finale dal 5 gennaio al 1 marzo 2026. Sono **1.344 giornate-serie
+complete**, il doppio delle istituzioni e il doppio delle settimane di test
+della prima ricerca. Resta la stessa rete, quindi non è una prova su un altro
+operatore indipendente.
+
+Il file è verificato con il checksum ufficiale. Ho individuato e mascherato
+47 ore dello storico legate a interruzioni annotate o al cambio d'ora: alcuni
+valori apparentemente bassi possono essere aggregazioni parziali del sistema
+di misura. Non li ho interpretati come diminuzioni reali del traffico.
+I controlli software verificano che margini e correzioni non possano leggere
+osservazioni future. Dashboard e servizi di produzione non servono al calcolo:
+la ricerca usa container temporanei con limiti di memoria e CPU.
+
+La politica originale viene rieseguita sugli stessi dati 2026 insieme a
+quella adattiva. Questo permette di distinguere l'effetto della correzione
+dal semplice cambiamento del periodo. Modello e parametri vengono scelti
+prima del test e gli esiti sfavorevoli rimangono pubblicati.
+
+**La seconda verifica è conclusa:** 24 istituzioni, otto settimane finali
+dal 5 gennaio al 1 marzo 2026, 1.344 giornate-serie complete. Sono state
+calcolate 18.144 previsioni includendo calibrazione e selezione e confrontate
+241 combinazioni di modello e politica, con le stesse protezioni disponibili
+per AI e metodi classici. Il riferimento scelto prima del test è ancora ETS.
+
+| Risultato sul nuovo test | Timestral 28M | ETS |
+|---|---:|---:|
+| Errore medio della previsione, Mbit/s | 0,8034 | 1,2513 |
+| Capacità simulata, moduli-ora | 1.679.669 | 1.659.699 |
+| Domanda normalizzata non coperta | 1,540% | 1,496% |
+
+**La previsione AI migliora del 35,80%**, con intervallo al 95%
+**[30,04%; 41,44%]** e un MAE più basso in tutte le 24 istituzioni.
+Rispetto alla regressione con calendario, la baseline classica con il
+miglior MAE osservato sul test, la riduzione è circa 21,26%: è un confronto
+descrittivo, senza cambiare a posteriori il riferimento primario.
+
+**Il piano AI non migliora il dimensionamento:** usa il 1,20% di capacità
+in più e lascia leggermente più domanda scoperta. L'intervallo del risparmio,
+[−5,44%; +2,46%], non dimostra un vantaggio stabile di capacità. Entrambi
+superano la soglia dell'1% richiesta. Non è un via libera a sostituire un
+sistema esistente, né una dimostrazione che ETS sia sempre superiore.
+
+#### Cosa ci ha insegnato la correzione
+
+La protezione reattiva riduce il deficit, pagando capacità aggiuntiva. Sul
+28M, mantenendo il margine fisso, il deficit scende da 1,305% a 1,169%.
+Il margine aggiornato, invece, rende il piano più piccolo: con la reazione
+la capacità scende del 15,67% rispetto alla politica originale sugli stessi
+dati, ma il deficit sale a 1,540%. Lo stesso meccanismo compare con ETS.
+La regola scelta rispettava il limite nel periodo di selezione; non lo
+conserva sul test. Una previsione mediamente precisa non basta a proteggere
+le ore con i picchi più difficili.
+Nel test nuovo il piano AI lascia domanda scoperta in appena 126 delle
+32.256 ore-serie (0,391%): poche ore, ma con picchi abbastanza grandi da
+superare il limite sulla quantità di domanda non coperta. Ecco perché
+«più preciso in media» non significa automaticamente «più affidabile».
+
+Alcune alternative classiche più prudenti, MSTL e media di quattro settimane,
+restano sotto l'1% aggregato nel test, ma richiedono circa il 24–28% di capacità
+in più delle rispettive politiche originali e lasciano comunque una
+istituzione oltre il 5%. Sono risultati secondari pubblicati per intero:
+non cambiamo il vincitore dopo aver visto il test.
+
+**Il dato reale è affidabile quanto possiamo verificarlo:** provenienza e
+checksum ufficiali, anomalie annotate mascherate, nessun giorno mancante nel
+test e controlli contro l'uso del futuro. Questo non certifica gli strumenti
+di misura originali. Capacità, deficit e costi restano simulazioni; il deficit
+non equivale a pacchetti persi misurati o a una violazione contrattuale.
+Contando il traffico grezzo, anziché la domanda normalizzata per istituzione,
+il deficit del nuovo piano è 0,673% per 28M e 0,651% per ETS. È una misura
+secondaria: non sostituisce il criterio originale fallito.
+
+#### Anche il costo del modello è stato misurato
+
+Su una CPU, una previsione di 24 ore a modello caricato richiede in mediana
+circa **114 ms per 28M**, **29 ms per 5M**, **209 ms per ETS** e **4,7 ms per
+la regressione**. I picchi di memoria dei processi sono rispettivamente
+544, 372, 234 e 128 MiB. Il 28M impiega circa 2,46 secondi al primo avvio.
+Queste sono misure dell'ambiente di test, non stime universali o costi cloud.
+Il 5M ha MAE 0,8297 contro 0,8034 del 28M: offre un compromesso interessante
+fra precisione, memoria e tempo, senza un vantaggio operativo dimostrato
+della taglia maggiore.
+
+#### Quindi, in un caso reale, lo userei?
+
+**Per prevedere il traffico e confrontare scenari, è un candidato concreto.
+Per sostituire oggi il dimensionamento esistente con questo piano, no.**
+Il vantaggio previsionale è misurato su due periodi; il risparmio a servizio
+comparabile non è dimostrato. Servono capacità reale delle risorse, tempi
+di attivazione, vincoli per singolo servizio e costi per valutare una migrazione.
+
+Lo strumento serve a prendere questa decisione con evidenze: separa errore
+della previsione, margine di sicurezza, consumo di risorse e domanda scoperta.
+Il risultato della ricerca è anche aver individuato quale parte della
+soluzione non funziona abbastanza, averla corretta e aver verificato
+onestamente che la correzione non raggiunge ancora l'obiettivo prefissato.
+
+**Testo breve aggiornato, pronto per la pagina portfolio:**
+
+> Ho sviluppato Capacity Planner per verificare se una previsione AI più
+> precisa permette di pianificare meglio la capacità di rete. Dopo un primo
+> benchmark ho analizzato i picchi che causavano il deficit, implementato
+> margini adattivi e protezioni reattive e confrontato AI e metodi classici
+> su un nuovo test di otto settimane e 24 istituzioni. Timestral 28M riduce
+> l'errore medio del 35,8% rispetto a ETS, ma il piano risultante usa l'1,2%
+> di capacità in più e supera ancora la soglia di domanda scoperta. Il progetto
+> dimostra un vantaggio nella previsione e spiega perché questo non basta
+> a giustificare una migrazione operativa. Dashboard, controlli sui dati,
+> simulazioni, intervalli statistici e misure di RAM e latenza rendono
+> verificabili sia i risultati positivi sia i limiti.
+
+La dashboard conserva i replay del primo benchmark. La seconda ricerca,
+completa di codice, CSV e grafici, è un esperimento separato riproducibile;
+non è stata incorporata nell'interfaccia dimostrativa.
+
+Fonti della seconda fase: [ricerca V2](capacityplanner/docs/RESEARCH_V2.md),
+[protocollo V2](capacityplanner/docs/PROTOCOL_V2.md),
+[diagnosi del primo esperimento](capacityplanner/results/capacity-v2/diagnosis.json),
+[controlli e campione nuovo](capacityplanner/results/capacity-v2/data_selection.json),
+[risultati completi](capacityplanner/results/capacity-v2/RESULTS_GENERATED.md),
+[intervalli dell'accuratezza](capacityplanner/results/capacity-v2/secondary_accuracy.json),
+[effetto delle due protezioni](capacityplanner/results/capacity-v2/factorial_ablation.csv),
+[tempi e memoria](capacityplanner/results/capacity-v2/runtime_benchmark.json).
+
 ## Competenze dimostrate
 
 - Pipeline di dati, API Python e interfacce React/TypeScript utilizzabili.
@@ -333,16 +490,20 @@ La validazione software ha prodotto **194 test passati**, con sei test di
 integrazione esclusi da quella suite e inferenze reali eseguite nei benchmark
 separati. I test software verificano il funzionamento del codice: non sono
 una prova del vantaggio economico del modello. Capacity Planner aggiunge
-19 test Python, tre test browser desktop/mobile e verifiche API con 5M/28M
-reali. Il benchmark conserva anche il mancato raggiungimento dell'obiettivo.
+19 test Python nella prima fase, tre test browser desktop/mobile e verifiche
+API con 5M/28M reali. La seconda fase porta la suite Python a **28 test passati**,
+con nove controlli aggiuntivi sulla simulazione causale. Non sono stati
+rieseguiti i test browser nella seconda fase, che non modifica il frontend.
+I benchmark conservano anche il mancato raggiungimento dell'obiettivo.
 
 ## Messaggio finale per la pagina
 
 Timestral mostra capacità utili nei nostri confronti. Il lavoro applicativo
 consiste nel collegare quelle capacità alla decisione giusta: stimare un profilo
 orario, prevedere un volume cumulato o riconoscere un incidente richiedono
-valutazioni diverse. Il passo successivo è correggere e verificare questo
-collegamento, poi misurare i risultati su dati reali nuovi.
+valutazioni diverse. Per Capacity Planner abbiamo già corretto e verificato
+questo collegamento su dati reali nuovi: la previsione migliora, mentre la
+politica adattiva testata non raggiunge l'obiettivo operativo.
 
 La [pianificazione della capacità](capacityplanner/README.md) è ora un quarto
 progetto realizzato e verificato su dati reali. L'evidenza esterna che aveva

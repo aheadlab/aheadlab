@@ -1,0 +1,122 @@
+{
+  "original_totals_reproduced": true,
+  "models": [
+    {
+      "model": "28M",
+      "unit_hours": 133800,
+      "deficit_fraction": 0.02059581549958724,
+      "top_institution": "242",
+      "top_institution_share": 0.8578863950454197,
+      "top_two_institutions_share": 0.9244826766495645,
+      "top_two_days_share": 0.5194070797636009,
+      "worst_one_percent_hours_share": 1.0,
+      "midnight_share": 0.0,
+      "deficit_no_startup": 0.02059581549958724,
+      "exceed_calibration_max_hours": 39
+    },
+    {
+      "model": "5M",
+      "unit_hours": 132651,
+      "deficit_fraction": 0.020800802527438243,
+      "top_institution": "242",
+      "top_institution_share": 0.8541077767719354,
+      "top_two_institutions_share": 0.9219440192294539,
+      "top_two_days_share": 0.5154792837567912,
+      "worst_one_percent_hours_share": 1.0,
+      "midnight_share": 0.0,
+      "deficit_no_startup": 0.020800802527438243,
+      "exceed_calibration_max_hours": 39
+    },
+    {
+      "model": "daily",
+      "unit_hours": 147238,
+      "deficit_fraction": 0.022821034389612582,
+      "top_institution": "242",
+      "top_institution_share": 0.8685192628561156,
+      "top_two_institutions_share": 0.9251651447840812,
+      "top_two_days_share": 0.4906856855875069,
+      "worst_one_percent_hours_share": 1.0000000000000002,
+      "midnight_share": 0.0,
+      "deficit_no_startup": 0.022821034389612582,
+      "exceed_calibration_max_hours": 40
+    },
+    {
+      "model": "ets",
+      "unit_hours": 142798,
+      "deficit_fraction": 0.01835404050648798,
+      "top_institution": "242",
+      "top_institution_share": 0.8475476217884541,
+      "top_two_institutions_share": 0.9152231795710715,
+      "top_two_days_share": 0.5304714195138703,
+      "worst_one_percent_hours_share": 1.0000000000000002,
+      "midnight_share": 0.0,
+      "deficit_no_startup": 0.01835404050648798,
+      "exceed_calibration_max_hours": 38
+    },
+    {
+      "model": "last",
+      "unit_hours": 148825,
+      "deficit_fraction": 0.021584854384052346,
+      "top_institution": "242",
+      "top_institution_share": 0.8149224678387497,
+      "top_two_institutions_share": 0.882121987114575,
+      "top_two_days_share": 0.49492755631552965,
+      "worst_one_percent_hours_share": 1.0,
+      "midnight_share": 0.0,
+      "deficit_no_startup": 0.021584854384052346,
+      "exceed_calibration_max_hours": 53
+    },
+    {
+      "model": "mstl",
+      "unit_hours": 136162,
+      "deficit_fraction": 0.014691369628314693,
+      "top_institution": "242",
+      "top_institution_share": 0.8563293740416811,
+      "top_two_institutions_share": 0.9335817629940147,
+      "top_two_days_share": 0.5419054970296608,
+      "worst_one_percent_hours_share": 0.9999999999999999,
+      "midnight_share": 0.0,
+      "deficit_no_startup": 0.014691369628314693,
+      "exceed_calibration_max_hours": 33
+    },
+    {
+      "model": "ridge",
+      "unit_hours": 133396,
+      "deficit_fraction": 0.02247467437447163,
+      "top_institution": "242",
+      "top_institution_share": 0.8723334110730866,
+      "top_two_institutions_share": 0.9245872028694101,
+      "top_two_days_share": 0.4912276148073759,
+      "worst_one_percent_hours_share": 1.0000000000000002,
+      "midnight_share": 0.0,
+      "deficit_no_startup": 0.02247467437447163,
+      "exceed_calibration_max_hours": 47
+    },
+    {
+      "model": "weekly",
+      "unit_hours": 138030,
+      "deficit_fraction": 0.01304971785485774,
+      "top_institution": "242",
+      "top_institution_share": 0.7760217127333722,
+      "top_two_institutions_share": 0.8893407341403605,
+      "top_two_days_share": 0.5338874833733066,
+      "worst_one_percent_hours_share": 1.0,
+      "midnight_share": 0.0,
+      "deficit_no_startup": 0.01304971785485774,
+      "exceed_calibration_max_hours": 33
+    },
+    {
+      "model": "weekly_mean",
+      "unit_hours": 128721,
+      "deficit_fraction": 0.013490160994260855,
+      "top_institution": "242",
+      "top_institution_share": 0.7476085894444872,
+      "top_two_institutions_share": 0.8346636628386024,
+      "top_two_days_share": 0.4657562896331503,
+      "worst_one_percent_hours_share": 0.9999999999999999,
+      "midnight_share": 0.0,
+      "deficit_no_startup": 0.013490160994260855,
+      "exceed_calibration_max_hours": 63
+    }
+  ]
+}
