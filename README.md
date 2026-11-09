@@ -1,6 +1,6 @@
-# aheadlab — quattro progetti in locale
+# aheadlab — cinque progetti in locale
 
-Quattro applicazioni di previsione su CPU. Le prime tre derivano da [`PROGETTI.md`](PROGETTI.md); Capacity Planner estende la ricerca al traffico di rete reale e al dimensionamento delle risorse. Ogni cartella contiene package Python, frontend React/TypeScript, API FastAPI, Dockerfile, test, licenza e risultati. Non ci sono import runtime fra i progetti.
+Cinque applicazioni di previsione su CPU. Le prime tre derivano da [`PROGETTI.md`](PROGETTI.md); Capacity Planner estende la ricerca al traffico di rete reale e al dimensionamento delle risorse; CarbonShift verifica la scelta dell'orario per un lavoro elettrico differibile. Ogni cartella contiene package Python, frontend React/TypeScript, API FastAPI, Dockerfile, test, licenza e risultati. Non ci sono import runtime fra i progetti.
 
 | Progetto | Applicazione | Dashboard locale |
 |---|---|---|
@@ -8,18 +8,29 @@ Quattro applicazioni di previsione su CPU. Le prime tre derivano da [`PROGETTI.m
 | [StockSense](stocksense/README.md) | Vendite, riordini CSV e simulazione scorte | http://localhost:8502 |
 | [SolarCast](solarcast/README.md) | Fotovoltaico, meteo e fasce di autoconsumo | http://localhost:8503 |
 | [Capacity Planner](capacityplanner/README.md) | Traffico reale, capacità oraria e verifica del vantaggio AI | http://localhost:8504 |
+| [CarbonShift](carbonshift/README.md) | Quando eseguire un lavoro: confronto delle emissioni attribuite | http://localhost:8505 |
 
 Capacity Planner si avvia separatamente con `docker compose -f capacityplanner/compose.yaml up -d --build --wait`.
 Il Compose principale continua a gestire solo i tre progetti originali.
 La [prima ricerca](capacityplanner/docs/RESEARCH.md) misura un MAE del 28M inferiore
 del 20,79% a ETS su CESNET, ma non conferma il criterio di risparmio operativo.
-La [scheda portfolio](PORTFOLIO_RICERCA.md) raccoglie risultati e limiti dei quattro casi.
+La [scheda portfolio](PORTFOLIO_RICERCA.md) raccoglie risultati e limiti dei cinque casi.
 La [ricerca successiva](capacityplanner/docs/RESEARCH_V2.md) approfondisce i picchi,
 confronta politiche adattive e controlli senza AI e usa un nuovo test CESNET 2026.
 Su 24 istituzioni e otto settimane conferma il vantaggio previsionale
 (MAE 28M −35,80% rispetto a ETS), ma non quello operativo: capacità +1,20%
 e deficit 1,540% contro 1,496%. Risultati, diagnosi e misure RAM/latenza sono
 completi; i frontend conservano le demo e i replay esistenti.
+
+[CarbonShift](carbonshift/docs/RESEARCH.md) aggiunge un confronto sulla decisione:
+quattro ore di lavoro da completare entro 96, stessa energia per ogni metodo.
+Sul test storico di 1.056 casi, Timestral 5M riduce le emissioni attribuite
+dello **0,66% rispetto a GBM**, circa **144 g/MWh**, con intervallo al 95%
+[0,12%; 1,20%]. Il controllo recente di 14 giorni è inconcludente. È un
+beneficio piccolo nel simulatore, senza prova di ROI o emissioni marginali
+evitate in produzione. Dashboard autonoma, 23 test Python, tre test browser
+e 24 previsioni riprodotte localmente. Avvio e limiti nel suo README;
+al termine della verifica dashboard e modello sono stati fermati.
 
 ## Documentazione per sottoprogetto
 

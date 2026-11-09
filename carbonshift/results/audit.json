@@ -1,0 +1,29 @@
+{
+  "numerical_totals_match": true,
+  "frozen_hashes_match": true,
+  "selection_unchanged": true,
+  "energy_and_deadline_invariants": true,
+  "stats": {
+    "retro": {
+      "against_immediate_pct": 4.738966761498231,
+      "against_fixed_pct": 2.9103752994840693,
+      "against_sarima_pct": 3.1313505832911925,
+      "kg_per_mwh_ai": 21.572933004310034,
+      "kg_per_mwh_gbm": 21.71673639003818,
+      "difference_kg_per_mwh": 0.14380338572814466,
+      "cases": 1056,
+      "all_jobs_completed": true
+    },
+    "holdout": {
+      "against_immediate_pct": 2.306205408228057,
+      "against_fixed_pct": 0.6490865155692971,
+      "against_sarima_pct": 0.850706502905918,
+      "kg_per_mwh_ai": 20.713183326024417,
+      "kg_per_mwh_gbm": 20.82969834202281,
+      "difference_kg_per_mwh": 0.11651501599839165,
+      "cases": 84,
+      "all_jobs_completed": true
+    }
+  },
+  "block14_holdout_note": "Not interpretable: with 14 origins a circular block of length 14 contains the whole sample and yields a degenerate interval. Use the reported block-7 interval only; the 176-day sensitivity remains valid."
+}

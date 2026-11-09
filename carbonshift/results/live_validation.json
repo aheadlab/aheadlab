@@ -1,0 +1,9 @@
+{
+  "health": true,
+  "replay_api": true,
+  "real_timestral_5m_inference": true,
+  "history_hours": 168,
+  "forecast_hours": 96,
+  "window_start": 0,
+  "window_stop": 4
+}

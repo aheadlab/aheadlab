@@ -1,0 +1,3 @@
+carbon_source/
+*.log
+__pycache__/

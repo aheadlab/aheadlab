@@ -1,0 +1,12 @@
+{
+  "phases": [
+    "test",
+    "report"
+  ],
+  "services_unchanged": true,
+  "existing_services": 8,
+  "min_host_available_gib": 10.462337493896484,
+  "memory_limit_gib": 2,
+  "cpu": 1,
+  "network": "none"
+}

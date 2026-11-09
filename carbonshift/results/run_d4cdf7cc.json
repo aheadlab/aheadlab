@@ -1,0 +1,12 @@
+{
+  "phases": [
+    "reproduce",
+    "test"
+  ],
+  "services_unchanged": true,
+  "existing_services": 8,
+  "min_host_available_gib": 8.664287567138672,
+  "memory_limit_gib": 2,
+  "cpu": 1,
+  "network": "none"
+}

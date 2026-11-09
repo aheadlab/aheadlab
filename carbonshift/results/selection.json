@@ -1,0 +1,24 @@
+{
+  "ai": "Timestral-5M",
+  "classic": "GBM",
+  "development_scores": {
+    "GBM": 20.522878978008983,
+    "fixed_hour": 20.941926147099416,
+    "SARIMA": 21.000741430406844,
+    "hourly_mean": 21.038249203337326,
+    "immediate": 21.247931688096205,
+    "yesterday": 21.311622650806928,
+    "snaive_week": 21.325347700241927
+  },
+  "fixed_hours_utc": {
+    "NO1": 20,
+    "NO2": 0,
+    "NO3": 23,
+    "NO4": 15,
+    "NO5": 15,
+    "SE1": 22,
+    "SE2": 23,
+    "SE3": 23,
+    "SE4": 23
+  }
+}

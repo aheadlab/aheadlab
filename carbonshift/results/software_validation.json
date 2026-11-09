@@ -1,0 +1,36 @@
+{
+  "recorded_utc": "2026-11-09T20:12:04.917897+00:00",
+  "python_tests_passed": 23,
+  "browser_tests_passed": 3,
+  "typescript_and_vite_build": "passed using offline workspace dependency volume",
+  "docker_build": "local image built and exercised; standalone network build not rerun",
+  "live_api": {
+    "health": true,
+    "replay_api": true,
+    "real_timestral_5m_inference": true,
+    "history_hours": 168,
+    "forecast_hours": 96,
+    "window_start": 0,
+    "window_stop": 4
+  },
+  "local_forecast_reproduction": "24 of 24 selected windows match; see local_reproduction.json",
+  "source_checksums_verified": 17,
+  "frozen_hashes_match": true,
+  "python_syntax_files_checked": 21,
+  "package_lock_matches_manifest": true,
+  "documentation_local_links_valid": true,
+  "resource_limits": {
+    "research_memory_gib": 2,
+    "research_cpus": 1,
+    "research_network": "none",
+    "research_min_host_available_gib": 8.509944915771484
+  },
+  "final_state": {
+    "existing_services_running": 8,
+    "research_runs_preserved_services": true,
+    "carbonshift": "Exited (0)",
+    "capacityplanner": "Exited (0)",
+    "host_available_gib_at_final_os_check": 10.887718200683594
+  },
+  "scope": "Software checks establish implementation behavior, not industrial ROI or avoided marginal emissions."
+}

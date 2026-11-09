@@ -1,8 +1,8 @@
 # Aheadlab — note e testo per la pagina portfolio
 
-Ricerca aggiornata all'8 novembre 2026. Questo documento prepara i contenuti della
+Ricerca aggiornata al 9 novembre 2026. Questo documento prepara i contenuti della
 pagina portfolio. I tre frontend originali restano intatti; Capacity Planner
-è il quarto progetto, con dashboard e benchmark propri.
+e CarbonShift sono il quarto e quinto progetto, con dashboard e benchmark propri.
 
 ## Titolo proposto
 
@@ -10,10 +10,10 @@ pagina portfolio. I tre frontend originali restano intatti; Capacity Planner
 
 ## Introduzione pronta per la pagina
 
-Ho costruito quattro applicazioni dimostrative per mettere alla prova Timestral,
-un modello preaddestrato per serie temporali, in quattro contesti: costi cloud,
+Ho costruito cinque applicazioni dimostrative per mettere alla prova Timestral,
+un modello preaddestrato per serie temporali, in cinque contesti: costi cloud,
 riordino di magazzino, produzione fotovoltaica e pianificazione della capacità
-di rete. Ogni applicazione collega
+di rete e scelta dell'orario per lavori elettrici differibili. Ogni applicazione collega
 una pipeline dati e un backend Python a un frontend React/TypeScript.
 
 L'obiettivo della ricerca è misurare quando il modello aggiunge valore rispetto
@@ -58,7 +58,7 @@ testato anche una correzione del dimensionamento su dati nuovi. Il beneficio
 operativo non è confermato. Il risultato distingue la capacità utile del
 modello dall'efficacia della regola che prende decisioni usando le previsioni.
 
-## Quattro schede di ricerca
+## Cinque schede di ricerca
 
 ### StockSense — vendite e riordino
 
@@ -478,6 +478,128 @@ Fonti della seconda fase: [ricerca V2](capacityplanner/docs/RESEARCH_V2.md),
 [effetto delle due protezioni](capacityplanner/results/capacity-v2/factorial_ablation.csv),
 [tempi e memoria](capacityplanner/results/capacity-v2/runtime_benchmark.json).
 
+## CarbonShift: un vantaggio sulla decisione, piccolo e misurato
+
+### A cosa serve, in parole semplici
+
+Un lavoro dura quattro ore, ma può essere completato entro quattro giorni.
+Può essere un rendering, un'elaborazione batch o una ricarica non urgente.
+CarbonShift propone quando iniziare, cercando le ore in cui l'elettricità ha
+minore intensità carbonica. Tutti i metodi completano lo stesso lavoro con
+la stessa energia: il confronto riguarda soltanto l'orario scelto.
+
+Timestral è il modello numerico di Mistral per serie temporali: qui non si
+usa un chatbot. Dallo storico dell'intensità carbonica prevede le 96 ore
+successive; un algoritmo sceglie le quattro ore consecutive con media più
+bassa. Con i dati osservati dopo la decisione misuriamo il risultato della
+finestra scelta. Questo verifica l'utilità della decisione oltre all'errore
+medio di previsione.
+
+### Ricerca e affidabilità dei dati
+
+Prima abbiamo provato a scegliere finestre di manutenzione sul traffico di
+rete: una semplice media storica superava l'AI. Quel risultato negativo è
+conservato, senza costruire una demo intorno a un vantaggio inesistente.
+
+Per CarbonShift abbiamo usato dati e previsioni pubblici dello studio
+[Khepri-TSFM](https://doi.org/10.5281/zenodo.23912503), derivati da ENTSO-E,
+con versione fissata e licenza CC BY 4.0. Abbiamo verificato hash dei file,
+timestamp, duplicati, valori mancanti e corrispondenza delle osservazioni
+fra i metodi. Il confronto primario usa sei zone nordiche prive di target
+imputati nel periodo documentato; le tre zone con imputazioni sono riportate
+separatamente. Si tratta di intensità calcolate dal mix di produzione,
+non di misure delle emissioni del singolo lavoro.
+
+Il periodo gennaio–giugno 2025 serve allo sviluppo. Il protocollo è stato
+fissato localmente prima del calcolo finale: lavoro di quattro ore entro
+96, riduzione minima dello 0,5% e intervallo statistico positivo. GBM è la
+baseline classica selezionata sullo sviluppo; includiamo anche SARIMA,
+profili storici, giorno/settimana precedente, orario fisso e avvio immediato.
+Il test successivo contiene 176 giorni e sei zone, **1.056 casi**. Il protocollo
+non è una preregistrazione esterna; i risultati previsionali della fonte
+erano già pubblici. L'esplorazione e i risultati scartati restano consultabili.
+
+### Migliora davvero? Quanto?
+
+**Nel test storico sì: la scelta dell'orario produce lo 0,66% in meno di
+emissioni attribuite rispetto a GBM.** L'intervallo al 95% è [0,12%; 1,20%],
+calcolato tenendo conto della dipendenza temporale. Anche la sensibilità con
+blocchi di 14 giorni resta positiva. Il criterio fissato è soddisfatto.
+
+| Stesso lavoro, stessa energia | kg CO₂e attribuiti per MWh |
+|---|---:|
+| Timestral 5M | 21,573 |
+| GBM, baseline scelta sullo sviluppo | 21,717 |
+| Profilo orario medio | 22,203 |
+| SARIMA | 22,270 |
+| Avvio immediato | 22,646 |
+
+La differenza rispetto a GBM è **144 grammi per MWh**, circa 14 grammi per
+100 kWh: un miglioramento piccolo. Rispetto all'avvio immediato diventa
+4,74%, ma un buon metodo classico ottiene già gran parte del beneficio.
+Timestral migliora 101 dei 176 giorni aggregati e cinque delle sei zone;
+non vince ogni caso. L'attesa media è circa 43 ore: serve un lavoro che
+possa davvero aspettare, senza costi superiori al beneficio.
+
+Su 14 giorni di ottobre 2026, successivi al rilascio del modello, la stima
+è favorevole dello 0,56%, ma l'intervallo [−0,66%; +1,80%] comprende anche
+un peggioramento. **Questo controllo è inconcludente.** I dati del 2025
+possono sovrapporsi al pretraining: non presentiamo il test storico come
+prova definitiva di generalizzazione a dati mai visti dal modello.
+
+### Ha senso sostituire un sistema esistente?
+
+Questo caso mostra un vantaggio misurato sulla decisione nel simulatore.
+Non basta a raccomandare una migrazione. Non abbiamo misurato risparmio
+monetario, energia dell'inferenza, costo dell'attesa o manutenzione, né
+eseguito lavori reali. Le emissioni sono attribuite dal mix di produzione:
+non dimostrano quanta CO₂ marginale sarebbe effettivamente evitata.
+
+Anche le baseline hanno limiti: GBM mantiene l'addestramento della fonte,
+precedente al 2024, senza aggiornamento quotidiano. Non abbiamo dimostrato
+superiorità su un GBM continuamente riaddestrato o su tutti i metodi classici.
+Revisioni e ritardi di pubblicazione dei dati non sono simulati.
+
+La conclusione utile per il portfolio è circoscritta: **in questo confronto,
+Timestral sceglie orari leggermente migliori del metodo classico selezionato.
+Il beneficio industriale netto rimane da verificare.** La ricerca risponde
+alla domanda senza trasformare un piccolo effetto storico in una promessa.
+
+### Che cosa è stato costruito e verificato
+
+Il quinto progetto è autonomo: dashboard React/TypeScript, API FastAPI,
+54 replay scelti per calendario, grafici, modifica dei vincoli, export CSV,
+tema chiaro/scuro e inferenza 5M locale su dati forniti dall'utente.
+La dashboard mostra anche casi persi dall'AI; un CSV nuovo produce una
+stima, non un risparmio già verificato. Nessun comando viene inviato a impianti.
+
+Abbiamo riprodotto 24 previsioni pubblicate: tutte scelgono la medesima
+finestra, con differenza numerica massima di 0,0000134 g/kWh. Le altre
+previsioni complete provengono dagli autori. Su una CPU la mediana misurata
+è circa 87 ms per previsione e il picco RSS circa 497 MiB. Sono passati
+23 test Python, tre test browser e una verifica API con inferenza reale.
+I quattro progetti precedenti e i servizi di produzione restano invariati.
+
+**Testo breve pronto per la pagina portfolio:**
+
+> Ho sviluppato CarbonShift per verificare se Timestral sceglie meglio quando
+> eseguire un lavoro elettrico rimandabile. A parità di energia, durata e
+> scadenza, il test storico su sei zone e 1.056 casi misura lo 0,66% in meno
+> di emissioni attribuite rispetto a GBM: circa 144 grammi per MWh. Ho
+> controllato la provenienza dei dati, separato sviluppo e test, riprodotto
+> un campione di inferenze e pubblicato intervalli statistici e risultati
+> negativi. La dashboard rende esplorabili le decisioni. Il vantaggio è
+> piccolo e il controllo recente è inconcludente: il progetto dimostra
+> un effetto nel simulatore, senza promettere risparmi industriali non misurati.
+
+Materiali: [progetto e comandi](carbonshift/README.md),
+[ricerca completa](carbonshift/docs/RESEARCH.md),
+[protocollo](carbonshift/docs/PROTOCOL.md),
+[formule e invarianti](carbonshift/docs/MATHEMATICS.md),
+[risultati](carbonshift/results/report.json),
+[riproduzione locale](carbonshift/results/local_reproduction.json),
+[controlli numerici](carbonshift/results/audit.json).
+
 ## Competenze dimostrate
 
 - Pipeline di dati, API Python e interfacce React/TypeScript utilizzabili.
@@ -495,6 +617,9 @@ API con 5M/28M reali. La seconda fase porta la suite Python a **28 test passati*
 con nove controlli aggiuntivi sulla simulazione causale. Non sono stati
 rieseguiti i test browser nella seconda fase, che non modifica il frontend.
 I benchmark conservano anche il mancato raggiungimento dell'obiettivo.
+CarbonShift aggiunge 23 test Python, tre test browser e un controllo API
+con modello reale; questi verificano il software, mentre il vantaggio sulla
+decisione deriva dal benchmark separato e dai suoi intervalli statistici.
 
 ## Messaggio finale per la pagina
 
@@ -509,6 +634,11 @@ La [pianificazione della capacità](capacityplanner/README.md) è ora un quarto
 progetto realizzato e verificato su dati reali. L'evidenza esterna che aveva
 motivato l'idea resta distinta dai nostri risultati. Il vantaggio previsionale
 è stato misurato; il vantaggio operativo del piano rimane non dimostrato.
+
+CarbonShift aggiunge un quinto caso con un miglioramento misurato sulla
+scelta dell'orario: 0,66% di emissioni attribuite in meno rispetto a GBM
+nel test storico. È un effetto piccolo; il controllo recente non è
+conclusivo e il valore netto in produzione non è stato dimostrato.
 
 ## Indicazioni editoriali
 

@@ -1,0 +1,98 @@
+{
+  "source": {
+    "commit": "f968f271487a110956ff1e29b9a88001d523aeb4",
+    "files": [
+      {
+        "path": "LICENSE-DATA",
+        "bytes": 18657,
+        "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+      },
+      {
+        "path": "README.md",
+        "bytes": 6443,
+        "sha256": "925b4ab09e1788942fcaba6643e74b75d1d924aa859f0ce9e160a5c12922884a"
+      },
+      {
+        "path": "data/CI_KHEPRI-TSFM_v1_2026-11-02.meta.json",
+        "bytes": 8203,
+        "sha256": "97f1cf6d7c640968ec800ebefb578680bdcdf44a8269dea6bdb6f0638a5f7929"
+      },
+      {
+        "path": "data/CI_KHEPRI-TSFM_v1_2026-11-02.parquet",
+        "bytes": 6380545,
+        "sha256": "ab308ae9f49fb9a4229d3ef089bb8b005fd149101a1e9596c9295c3e5cfa95f0"
+      },
+      {
+        "path": "data/CI_KHEPRI-TSFM_v1_2026-11-02.parquet.ots",
+        "bytes": 1806,
+        "sha256": "57142fe46088af886890c6f82a3847166c6f771471d893191ee7d9e7eff9c304"
+      },
+      {
+        "path": "data/CI_KHEPRI-TSFM_v1_2026-11-02.sha256",
+        "bytes": 208,
+        "sha256": "542bd4e10fac9a527e4b3fe20229302ecc65e0e8eb62e9d0ca0989d7745e6c96"
+      },
+      {
+        "path": "khepri_tsfm/data.py",
+        "bytes": 2687,
+        "sha256": "2e7dd3f573846e7bd9a9d6471960c72c0156b554ac76101b3bea9afede3a51e1"
+      },
+      {
+        "path": "khepri_tsfm/models.py",
+        "bytes": 2380,
+        "sha256": "1608a194b6b28e3ae024dce2beca5c6cafc6df4ae038ffccff9f18619d7162d9"
+      },
+      {
+        "path": "predictions/PRED-GBM_KHEPRI-TSFM_v1_2026-11-02.parquet",
+        "bytes": 3004133,
+        "sha256": "176de684adda5553c049ce63b4e3c597252dc05a362d97d7f2c799964a0f7343"
+      },
+      {
+        "path": "predictions/PRED-GBM_KHEPRI-TSFM_v1_2026-11-02.parquet.ots",
+        "bytes": 805,
+        "sha256": "4c29238f944dbafc27b0ada2c1feb62de871ade595263bbf5e21a62f0d86f14e"
+      },
+      {
+        "path": "predictions/PRED-SARIMA_KHEPRI-TSFM_v1_2026-11-02.parquet",
+        "bytes": 60824522,
+        "sha256": "0723656c5c4ce047612a8240becee9d59565db98bcee6763ec6871bc8a760d0e"
+      },
+      {
+        "path": "predictions/PRED-SARIMA_KHEPRI-TSFM_v1_2026-11-02.parquet.ots",
+        "bytes": 840,
+        "sha256": "73ebe39a16e79329cb60d42c5fd36e72b5ae94139fda9633adc10c201b7eb472"
+      },
+      {
+        "path": "predictions/PRED-Timestral-5M_KHEPRI-TSFM_v1_2026-11-02.parquet",
+        "bytes": 40959794,
+        "sha256": "cfa2d315c7b9ca2c1df9911edd7f6a514c2f04c0be691fa8edda4c870bb89456"
+      },
+      {
+        "path": "predictions/PRED-Timestral-5M_KHEPRI-TSFM_v1_2026-11-02.parquet.ots",
+        "bytes": 840,
+        "sha256": "44ec1dd8aa2d1d07b3c533b1b4936986a5745687ec8ee1472ef0632b689aee2f"
+      },
+      {
+        "path": "predictions/PRED-snaive_week_KHEPRI-TSFM_v1_2026-11-02.parquet",
+        "bytes": 1886922,
+        "sha256": "5cbfa2d01689d979fbf05c626c96bc6740b0e3e88bb8c73b4ccbae290909caf1"
+      },
+      {
+        "path": "predictions/PRED-snaive_week_KHEPRI-TSFM_v1_2026-11-02.parquet.ots",
+        "bytes": 770,
+        "sha256": "041bdac115a4e4ecbdec115da75a5e600e3e65eb7725dc3ef0a7b911ac21443b"
+      },
+      {
+        "path": "repro_from_ci.py",
+        "bytes": 6390,
+        "sha256": "b0eab28c2590f9dccf7850a19517d7f31382ea460d59eb1dc8a78ac10a200600"
+      }
+    ]
+  },
+  "hashes": {
+    "docs/PROTOCOL.md": "99486ef4a5d3bbe2a7dcdb4f2afafaa8245cea5f4a41757ca01a365be426a6c1",
+    "src/carbonshift/core.py": "98f9463742d0a42b49f80245883560835b366503058eda8cf764755747e8c2fb",
+    "scripts/benchmark.py": "55d16b4aa39724b0ab8b889ce665d3968e2a584f415c185dfca2d380fb1eebde"
+  },
+  "created_utc": "2026-11-09 10:26:49.619191+00:00"
+}

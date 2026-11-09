@@ -1,0 +1,25 @@
+name: carbonshift
+services:
+  carbonshift:
+    build:
+      context: .
+      args:
+        INSTALL_MODEL: "true"
+    image: aheadlab-carbonshift
+    ports: ["127.0.0.1:8505:8501"]
+    mem_limit: 2g
+    memswap_limit: 2g
+    cpus: 1
+    pids_limit: 256
+    restart: "no"
+    environment:
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      HF_HUB_OFFLINE: "1"
+    volumes:
+      - model-cache:/home/app/.cache/huggingface:ro
+volumes:
+  model-cache:
+    external: true
+    name: ${CARBON_MODEL_VOLUME:-aheadlab-hf}

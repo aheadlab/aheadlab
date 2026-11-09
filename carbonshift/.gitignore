@@ -1,0 +1,9 @@
+data/raw/
+data/cache/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+*.log
+results/services_*.json
+results/memory_*.json
+.env

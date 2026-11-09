@@ -1,0 +1,3 @@
+docs/PROTOCOL.md text eol=lf
+src/carbonshift/core.py text eol=lf
+scripts/benchmark.py text eol=lf

@@ -131,3 +131,43 @@ Prove e riproduzione: [ricerca V2](capacityplanner/docs/RESEARCH_V2.md),
 [protocollo](capacityplanner/docs/PROTOCOL_V2.md),
 [controlli numerici](capacityplanner/results/capacity-v2/checks.json),
 [piano completato](capacityplanner/docs/WORKPLAN_V2.md).
+
+## Quinto progetto CarbonShift, 9 novembre 2026
+
+Nuovo caso autonomo: pianificare quattro ore di lavoro elettrico entro 96,
+con identica energia e scadenza per tutti i metodi. Primo candidato scartato
+(finestre di manutenzione CESNET), esplorazione conservata e protocollo
+fissato prima del confronto finale. Dataset Khepri-TSFM v1.0.1, commit
+fissato, checksum verificati, sei zone senza target imputati nel periodo
+documentato; altre tre zone riportate separatamente.
+
+Sul test storico separato di 176 giorni e 1.056 casi, Timestral 5M produce
+emissioni attribuite inferiori dello 0,662% rispetto a GBM, selezionato sullo
+sviluppo. Intervallo al 95% [0,124%; 1,202%], circa 144 g/MWh. Il criterio
+primario è soddisfatto. Il controllo di 14 giorni dopo il rilascio misura
+0,559%, intervallo [−0,661%; 1,797%]: inconcludente. Nessuna affermazione di
+risparmio economico, emissioni marginali evitate o vantaggio in produzione.
+Il GBM pubblicato non è aggiornato quotidianamente; il 2025 può sovrapporsi
+al pretraining. I limiti restano accanto al risultato.
+
+Completati 23 test Python, tre test browser desktop/mobile, controllo
+TypeScript/build e API con inferenza 5M reale. Riprodotte localmente 24
+previsioni pubblicate, stessa finestra in 24 casi su 24, scarto massimo
+0,0000134 g/kWh. Mediana circa 87 ms, picco RSS circa 497 MiB.
+Gli hash del protocollo e dei sorgenti scientifici coincidono con quelli
+registrati prima del confronto. Verificate somme, selezione della baseline,
+energia e scadenze; intervallo a blocchi 14 escluso per il periodo di soli
+14 giorni perché degenere, senza modificarne il risultato primario.
+
+Calcoli isolati con limite 2 GiB, una CPU, rete assente e nessuno swap
+aggiuntivo. Minimo host disponibile campionato 8,51 GiB nei job scientifici.
+Gli otto servizi precedenti risultano invariati. CarbonShift è stato spento
+dopo i test, terminando il modello; Capacity Planner rimane spento.
+I quattro progetti precedenti non sono stati modificati.
+
+Artefatti: [ricerca](carbonshift/docs/RESEARCH.md),
+[matematica](carbonshift/docs/MATHEMATICS.md),
+[risultati](carbonshift/results/report.json),
+[controlli](carbonshift/results/audit.json),
+[registro software](carbonshift/results/software_validation.json),
+[testo portfolio](PORTFOLIO_RICERCA.md).

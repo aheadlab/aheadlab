@@ -1,0 +1,4 @@
+services:
+  carbonshift:
+    build:
+      dockerfile: Dockerfile.local

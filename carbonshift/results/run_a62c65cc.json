@@ -1,0 +1,11 @@
+{
+  "phases": [
+    "benchmark"
+  ],
+  "services_unchanged": true,
+  "existing_services": 8,
+  "min_host_available_gib": 8.509944915771484,
+  "memory_limit_gib": 2,
+  "cpu": 1,
+  "network": "none"
+}

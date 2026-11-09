@@ -1,0 +1,77 @@
+{
+  "status": "complete",
+  "ai": "Timestral-5M",
+  "classic": "GBM",
+  "zones": [
+    "NO1",
+    "NO4",
+    "SE1",
+    "SE2",
+    "SE3",
+    "SE4"
+  ],
+  "energy_kwh": 100,
+  "duration": 4,
+  "deadline": 96,
+  "results": {
+    "retro": {
+      "saving_pct": 0.662177700854305,
+      "ci95": [
+        0.1243756359588194,
+        1.2017518162060223
+      ],
+      "difference_g_per_kwh": 0.14380338572814466,
+      "days": 176,
+      "zones": 6,
+      "block14": {
+        "saving_pct": 0.662177700854305,
+        "ci95": [
+          0.10592092339737513,
+          1.2426245203209818
+        ],
+        "difference_g_per_kwh": 0.14380338572814466,
+        "days": 176,
+        "zones": 6
+      },
+      "ai_ci": 21.572933004310034,
+      "classic_ci": 21.71673639003818,
+      "days_better": 101,
+      "zones_better": 5,
+      "passed": true
+    },
+    "holdout": {
+      "saving_pct": 0.5593696753799171,
+      "ci95": [
+        -0.6614595013255009,
+        1.7966712074203084
+      ],
+      "difference_g_per_kwh": 0.1165150159983881,
+      "days": 14,
+      "zones": 6,
+      "block14": {
+        "saving_pct": 0.5593696753799171,
+        "ci95": [
+          0.5593696753798949,
+          0.5593696753799504
+        ],
+        "difference_g_per_kwh": 0.1165150159983881,
+        "days": 14,
+        "zones": 6
+      },
+      "ai_ci": 20.713183326024417,
+      "classic_ci": 20.829698342022805,
+      "days_better": 10,
+      "zones_better": 5,
+      "passed": false
+    }
+  },
+  "all_jobs_completed": true,
+  "negative_forecasts_clipped": 0,
+  "source_commit": "f968f271487a110956ff1e29b9a88001d523aeb4",
+  "replay_count": 54,
+  "hashes": {
+    "docs/PROTOCOL.md": "99486ef4a5d3bbe2a7dcdb4f2afafaa8245cea5f4a41757ca01a365be426a6c1",
+    "src/carbonshift/core.py": "98f9463742d0a42b49f80245883560835b366503058eda8cf764755747e8c2fb",
+    "scripts/benchmark.py": "55d16b4aa39724b0ab8b889ce665d3968e2a584f415c185dfca2d380fb1eebde"
+  }
+}

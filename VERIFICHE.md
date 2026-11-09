@@ -85,3 +85,20 @@ Dati pubblici PVGIS v5_3 e Open-Meteo effettivamente scaricati per Varese 2022‚Ä
 - CloudGuard non recupera automaticamente giorni saltati perch√© provvisori e non deduplica gli invii: serve uno stato persistente per produzione.
 - SolarCast operativo richiede storico recente fornito dall'utilizzatore. Il modello non trasforma PVGIS storico in misure attuali.
 - Nessuna garanzia commerciale o di calibrazione dei quantili aggregati.
+
+## Aggiornamento CarbonShift, 9 novembre 2026
+
+Quinto progetto aggiunto senza modificare i quattro precedenti. Validazione
+dedicata: 23 test Python, tre test Playwright (desktop, mobile, ricerca,
+vincoli, esportazione, CSV invalido, tema persistente), TypeScript e build
+Vite; inferenza Timestral 5M reale tramite API. Campione di 24 previsioni
+pubbliche riprodotto localmente, stessa scelta della finestra in tutti i casi.
+
+Il benchmark separato misura un miglioramento piccolo sulla decisione:
+0,66% di emissioni attribuite in meno rispetto a GBM nel test storico;
+controllo recente inconcludente. I test software non sono una prova di ROI.
+I job scientifici hanno preservato gli otto servizi attivi e almeno 8,51 GiB
+di RAM disponibile nei campionamenti. Dashboard e modello CarbonShift
+arrestati al termine. Dettagli e limitazioni in
+[VALIDAZIONE.md](VALIDAZIONE.md) e nel
+[registro CarbonShift](carbonshift/results/software_validation.json).
